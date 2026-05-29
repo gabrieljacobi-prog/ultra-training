@@ -31,29 +31,29 @@
   --amber-lt: #e0a84a;
   --amber-txt:#dfa040;
 
-  /* ── Category colours — clearly distinct ── */
-  /* Easy  → muted teal */
-  --c-easy-bg:   #0e3028; --c-easy-fg: #64c99a;
-  /* Long  → deep navy-teal */
-  --c-long-bg:   #0a2240; --c-long-fg: #7ab8f0;
-  /* Strength → warm rust */
-  --c-str-bg:    #301a0e; --c-str-fg:  #e0885a;
-  /* Tempo → amber-gold */
-  --c-tempo-bg:  #2e1e04; --c-tempo-fg:#d4a030;
-  /* Intervals → vivid green */
-  --c-int-bg:    #0c2e14; --c-int-fg:  #4fd87a;
-  /* Incline → purple-slate */
-  --c-inc-bg:    #1e1438; --c-inc-fg:  #a888e8;
-  /* Night → cool blue */
-  --c-night-bg:  #0a1828; --c-night-fg:#80b8e8;
-  /* Back-to-back → teal-cyan */
-  --c-back-bg:   #0a2828; --c-back-fg: #40c8c0;
-  /* Race → bright amber on dark */
-  --c-race-bg:   #c8903a; --c-race-fg: #07201a;
-  /* Nutrition → olive */
-  --c-nut-bg:    #1e2810; --c-nut-fg:  #98c048;
-  /* Rest → flat */
-  --c-rest-bg:   #162018; --c-rest-fg: #5a7868;
+  /* ── Category colours — solid opaque backgrounds, vivid fg, max differentiation ── */
+  /* Easy       -> teal-green solid */
+  --c-easy-bg:   #1a5c3a; --c-easy-fg:  #a0ffc8;
+  /* Long       -> deep navy solid */
+  --c-long-bg:   #1a3a70; --c-long-fg:  #90d0ff;
+  /* Strength   -> warm brick red */
+  --c-str-bg:    #6a1e0a; --c-str-fg:   #ffb090;
+  /* Tempo      -> deep gold */
+  --c-tempo-bg:  #5a3500; --c-tempo-fg: #ffd060;
+  /* Intervals  -> vivid lime on dark */
+  --c-int-bg:    #0a3a10; --c-int-fg:   #78ff50;
+  /* Incline    -> rich purple */
+  --c-inc-bg:    #38186a; --c-inc-fg:   #ddb8ff;
+  /* Night sim  -> dark navy, ice blue text */
+  --c-night-bg:  #0a2248; --c-night-fg: #80d8ff;
+  /* Back-to-back -> deep magenta */
+  --c-back-bg:   #5a0a40; --c-back-fg:  #ffaaee;
+  /* Race       -> solid amber reversed */
+  --c-race-bg:   #c8903a; --c-race-fg:  #07201a;
+  /* Nutrition  -> olive solid */
+  --c-nut-bg:    #384a00; --c-nut-fg:   #d8f060;
+  /* Rest       -> flat grey-teal */
+  --c-rest-bg:   #243028; --c-rest-fg:  #88a898;
 
   --r:10px; --r2:14px;
   --shadow: 0 4px 24px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.3);
@@ -141,10 +141,10 @@ body{
 .phase-pill{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:4px 12px;border-radius:20px;white-space:nowrap;}
 .phase-line{flex:1;height:1px;background:var(--border);}
 .phase-name{font-family:var(--display);font-size:13px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:0.08em;white-space:nowrap;}
-.ph-build  .phase-pill{background:rgba(200,144,58,0.15);color:var(--amber-txt);border:1px solid rgba(200,144,58,0.3);}
-.ph-develop.phase-pill{background:rgba(64,200,192,0.1);color:#40c8c0;border:1px solid rgba(64,200,192,0.25);}
-.ph-peak   .phase-pill{background:var(--amber);color:var(--bg);font-weight:800;}
-.ph-taper  .phase-pill{background:rgba(100,200,154,0.1);color:#64c99a;border:1px solid rgba(100,200,154,0.25);}
+.ph-build   .phase-pill{background:#4a2e08; color:#ffc060; border:1px solid rgba(255,180,60,0.4);}
+.ph-develop .phase-pill{background:#0a3a40; color:#40e8e0; border:1px solid rgba(60,220,210,0.4);}
+.ph-peak    .phase-pill{background:var(--amber); color:var(--bg); font-weight:800;}
+.ph-taper   .phase-pill{background:#1a3050; color:#88b8f0; border:1px solid rgba(100,160,240,0.4);}
 
 /* ── WEEK CARD ─────────────────────────────────────────── */
 .week-card{
