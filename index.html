@@ -8,58 +8,36 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&family=Inconsolata:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-
-/*
-  MOSSARUN 24H — Teal Forest Palette
-  ────────────────────────────────────────────────────────────
-  Backgrounds: near-black teal → deep forest teal → card teal
-  Accent:      warm amber/sand (#c8963c)
-  Text:        near-white (#e8edea) → sage (#8aa098)
-
-  CONTRAST AUDIT — all pairs verified ≥ 4.5:1 (AA):
-  --cream   #e8edea on --ink  #0b1e18  → 14.6:1  ✓ AAA
-  --cream   #e8edea on --ink2 #132820  → 13.1:1  ✓ AAA
-  --cream2  #c2cec5 on --ink  #0b1e18  → 10.7:1  ✓ AAA
-  --cream2  #c2cec5 on --ink2 #132820  →  9.6:1  ✓ AAA
-  --cream3  #8a9e90 on --ink  #0b1e18  →  6.1:1  ✓ AA
-  --cream3  #8a9e90 on --ink3 #1a3028  →  4.9:1  ✓ AA
-  --dim     #8aa098 on --ink  #0b1e18  →  6.2:1  ✓ AA
-  --dim     #8aa098 on --ink2 #132820  →  5.6:1  ✓ AA
-  --dim     #8aa098 on --ink3 #1a3028  →  5.1:1  ✓ AA
-  --dimmer  #829a90 on --ink  #0b1e18  →  5.7:1  ✓ AA
-  --dimmer  #829a90 on --ink2 #132820  →  5.2:1  ✓ AA
-  --dimmer  #829a90 on --ink3 #1a3028  →  4.7:1  ✓ AA
-  --orange-txt #d4a84a on --ink  #0b1e18  →  7.8:1  ✓ AAA
-  --orange-txt #d4a84a on --ink2 #132820  →  7.0:1  ✓ AAA
-  Amber bg: #0b1e18 on #c8963c → 6.5:1  ✓ AA
-  Tags: all foreground/bg pairs ≥ 5.9:1  ✓ AA
-*/
-
 :root{
-  --ink:   #0b1e18;
-  --ink2:  #132820;
-  --ink3:  #1a3028;
-  --ink4:  #223a30;
-  --cream: #e8edea;
-  --cream2:#c2cec5;
-  --cream3:#8a9e90;
-  --dim:   #8aa098;
-  --dimmer:#829a90;
-  --orange:    #c8963c;
-  --orange-txt:#d4a84a;
-  --orange2:   #b0822e;
-  --orange-dk: #96701e;
-  --slate:     #2a4838;
-  --slate2:    #1e3830;
-  --r:10px;--r2:16px;
-  --display:'Barlow Condensed',sans-serif;
-  --body:'Barlow',sans-serif;
-  --mono:'Inconsolata',monospace;
+--ink: #0b1e18;
+--ink2: #132820;
+--ink3: #1a3028;
+--ink4: #223a30;
+--cream: #e8edea;
+--cream2:#c2cec5;
+--cream3:#8a9e90;
+--dim: #8aa098;
+--dimmer:#829a90;
+--orange: #c8963c;
+--orange-txt:#d4a84a;
+--orange2: #b0822e;
+--orange-dk: #96701e;
+--slate: #2a4838;
+--slate2: #1e3830;
+--r:10px;--r2:16px;
+--display:'Barlow Condensed',sans-serif;
+--body:'Barlow',sans-serif;
+--mono:'Inconsolata',monospace;
 }
-
 html{-webkit-text-size-adjust:100%;background:var(--ink);}
 body{font-family:var(--body);background:var(--ink);color:var(--cream);font-size:16px;line-height:1.5;min-height:100vh;}
-
+/* ── SYNC STATUS ─────────────────────────── */
+.sync-bar{display:flex;align-items:center;justify-content:center;gap:6px;padding:5px 12px;font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;transition:background 0.3s;}
+.sync-bar.syncing{background:#1a3028;color:var(--orange-txt);}
+.sync-bar.synced{background:#0f2820;color:#6abf90;}
+.sync-bar.error{background:#2a1010;color:#e07070;}
+.sync-bar.offline{background:#1a1a1a;color:var(--dimmer);}
+.sync-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;}
 /* ── HERO ─────────────────────────────────── */
 .hero{background:var(--ink2);border-bottom:1px solid rgba(138,184,160,0.15);position:sticky;top:0;z-index:100;}
 .hero-top{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 8px;}
@@ -78,35 +56,30 @@ body{font-family:var(--body);background:var(--ink);color:var(--cream);font-size:
 .btn-skip{background:var(--ink3);color:var(--cream3);border:1.5px solid rgba(138,184,160,0.2);border-radius:var(--r);padding:13px 14px;font-family:var(--display);font-size:19px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;}
 .btn-skip:active{opacity:0.7;}
 .hero-no-workout{padding:0 16px 14px;font-family:var(--mono);font-size:14px;color:var(--dim);}
-
 /* ── STATS ────────────────────────────────── */
 .stats-bar{display:grid;grid-template-columns:repeat(3,1fr);background:var(--ink3);border-bottom:1px solid rgba(138,184,160,0.12);}
 .stat-cell{padding:10px 12px;text-align:center;border-right:1px solid rgba(138,184,160,0.08);}
 .stat-cell:last-child{border-right:none;}
 .stat-val{font-family:var(--display);font-size:28px;font-weight:900;color:var(--cream);letter-spacing:0.02em;line-height:1;}
 .stat-lbl{font-family:var(--mono);font-size:11px;color:var(--dimmer);text-transform:uppercase;letter-spacing:0.09em;margin-top:3px;}
-
 /* ── MAIN ─────────────────────────────────── */
 .main{padding:14px 12px 100px;}
 .app-title{padding:16px 0 2px;display:flex;align-items:baseline;gap:10px;}
 .app-name{font-family:var(--display);font-size:40px;font-weight:900;color:var(--cream);text-transform:uppercase;letter-spacing:-0.01em;line-height:1;}
 .app-sub{font-family:var(--mono);font-size:13px;color:var(--orange-txt);letter-spacing:0.06em;padding-bottom:2px;}
-
 /* ── LEGEND ───────────────────────────────── */
 .legend{display:flex;flex-wrap:wrap;gap:6px;padding:8px 0 6px;}
 .leg-item{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:0.05em;}
 .leg-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
-
 /* ── PHASE ROW ────────────────────────────── */
 .phase-row{display:flex;align-items:center;gap:10px;margin:24px 0 10px;}
 .phase-pill{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px;white-space:nowrap;}
 .phase-line{flex:1;height:1px;background:rgba(138,184,160,0.15);}
 .phase-name{font-family:var(--display);font-size:14px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:0.07em;white-space:nowrap;}
-.ph-build  .phase-pill{background:#1a3028;color:#d4a84a;}
+.ph-build .phase-pill{background:#1a3028;color:#d4a84a;}
 .ph-develop.phase-pill{background:#132820;color:#8ab8a0;}
-.ph-peak   .phase-pill{background:#c8963c;color:#0b1e18;}
-.ph-taper  .phase-pill{background:#1a3028;color:#8ab8a0;}
-
+.ph-peak .phase-pill{background:#c8963c;color:#0b1e18;}
+.ph-taper .phase-pill{background:#1a3028;color:#8ab8a0;}
 /* ── WEEK CARD ────────────────────────────── */
 .week-card{background:var(--ink2);border:1px solid rgba(138,184,160,0.14);border-radius:var(--r2);margin-bottom:10px;overflow:hidden;}
 .week-card.is-current{border-color:var(--orange);border-width:1.5px;}
@@ -124,19 +97,17 @@ body{font-family:var(--body);background:var(--ink);color:var(--cream);font-size:
 .km-green{background:#1a3028;color:#d4a84a;}
 .km-blue {background:#132820;color:#8ab8a0;}
 .km-amber{background:#c8963c;color:#0b1e18;}
-.km-red  {background:#1a3028;color:#8ab8a0;}
+.km-red {background:#1a3028;color:#8ab8a0;}
 .km-gray {background:var(--ink3);color:var(--dim);}
 .week-prog{width:40px;height:3px;background:var(--ink4);border-radius:2px;overflow:hidden;}
 .week-prog-fill{height:100%;background:var(--orange);border-radius:2px;transition:width 0.3s;}
 .week-done-txt{font-family:var(--mono);font-size:11px;color:var(--orange-txt);letter-spacing:0.05em;}
 .chevron{font-size:16px;color:var(--dimmer);flex-shrink:0;transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);display:inline-block;line-height:1;}
 .chevron.open{transform:rotate(180deg);}
-
 /* ── ACCORDION ────────────────────────────── */
 .week-body{border-top:1px solid rgba(138,184,160,0.1);display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.38s cubic-bezier(0.4,0,0.2,1);}
 .week-body.open{grid-template-rows:1fr;}
 .week-body-inner{overflow:hidden;}
-
 /* ── DAY ROW ──────────────────────────────── */
 .day-row{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(138,184,160,0.07);}
 .day-row:last-child{border-bottom:none;}
@@ -153,26 +124,23 @@ body{font-family:var(--body);background:var(--ink);color:var(--cream);font-size:
 .day-label.is-today-lbl{color:var(--orange-txt);}
 .day-desc{font-size:14px;color:var(--cream2);line-height:1.55;}
 .day-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;}
-
 /* ── TAGS ─────────────────────────────────── */
 .tag{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;padding:3px 7px;border-radius:3px;}
-.tag-easy     {background:#1a3028;color:#8ab8a0;}
-.tag-long     {background:#132820;color:#8ab8a0;}
+.tag-easy {background:#1a3028;color:#8ab8a0;}
+.tag-long {background:#132820;color:#8ab8a0;}
 .tag-strength {background:transparent;color:var(--cream3);border:1px solid rgba(138,184,160,0.25);}
-.tag-tempo    {background:#2a2210;color:#c8963c;}
-.tag-rest     {background:transparent;color:var(--dimmer);border:1px solid rgba(138,184,160,0.15);}
-.tag-back     {background:#132820;color:#8ab8a0;}
-.tag-race     {background:#c8963c;color:#0b1e18;}
-.tag-night    {background:#141e2a;color:#88aed4;}
+.tag-tempo {background:#2a2210;color:#c8963c;}
+.tag-rest {background:transparent;color:var(--dimmer);border:1px solid rgba(138,184,160,0.15);}
+.tag-back {background:#132820;color:#8ab8a0;}
+.tag-race {background:#c8963c;color:#0b1e18;}
+.tag-night {background:#141e2a;color:#88aed4;}
 .tag-nutrition{background:transparent;color:var(--cream3);border:1px solid rgba(138,184,160,0.25);}
-.tag-incline  {background:transparent;color:var(--orange-txt);border:1px solid rgba(200,150,60,0.4);}
+.tag-incline {background:transparent;color:var(--orange-txt);border:1px solid rgba(200,150,60,0.4);}
 .tag-intervals{background:#1a3028;color:#6abf90;}
-
 /* ── NOTES ────────────────────────────────── */
 .week-note{margin:10px 14px 12px;padding:10px 12px;background:var(--ink3);border-radius:var(--r);font-size:14px;color:var(--cream3);line-height:1.65;border-left:2px solid rgba(138,184,160,0.25);}
 .adj-note{margin:6px 14px 10px;padding:10px 12px;background:rgba(138,184,160,0.04);border-radius:var(--r);font-size:14px;color:var(--cream2);line-height:1.6;border-left:2px solid var(--cream3);}
 .adj-note strong{font-weight:600;color:var(--cream);}
-
 /* ── DRAG HANDLE ──────────────────────────── */
 .drag-handle{width:22px;height:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;cursor:grab;color:var(--ink4);font-size:14px;line-height:1;border-radius:4px;transition:color 0.15s,background 0.15s;touch-action:none;-webkit-tap-highlight-color:transparent;}
 .drag-handle:active{cursor:grabbing;}
@@ -180,331 +148,376 @@ body{font-family:var(--body);background:var(--ink);color:var(--cream);font-size:
 .drag-handle:hover{background:var(--ink3);color:var(--cream);}
 .day-row.dragging{opacity:0.35;background:var(--ink3);}
 .day-row.drag-over{border-top:2px solid var(--orange);margin-top:-1px;}
-
 /* ── REORDER TOGGLE ───────────────────────── */
 .reorder-btn{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;padding:3px 8px;border-radius:20px;border:1px solid rgba(138,184,160,0.2);background:transparent;color:var(--dim);cursor:pointer;margin:10px 14px 2px;display:inline-flex;align-items:center;gap:5px;transition:background 0.15s,color 0.15s,border-color 0.15s;}
 .reorder-btn:hover{background:var(--ink3);color:var(--cream2);border-color:rgba(138,184,160,0.4);}
 .reorder-btn.active{background:var(--ink3);color:var(--orange-txt);border-color:var(--orange);}
-
 /* ── CONFLICT WARNING ─────────────────────── */
 .conflict-badge{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:2px 7px;border-radius:20px;background:rgba(200,150,60,0.12);color:var(--orange-txt);border:1px solid rgba(200,150,60,0.3);white-space:nowrap;}
 .day-conflict-warn{font-family:var(--mono);font-size:11px;color:var(--orange-txt);margin-top:5px;display:flex;align-items:center;gap:4px;}
 .week-card.has-conflict{border-color:rgba(200,150,60,0.45);}
+/* ── LOADING ──────────────────────────────── */
+#loading-screen{position:fixed;inset:0;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:999;}
+#loading-screen .load-title{font-family:var(--display);font-size:36px;font-weight:900;color:var(--cream);text-transform:uppercase;letter-spacing:0.02em;}
+#loading-screen .load-sub{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase;}
 </style>
 </head>
 <body>
 
-<div class="hero" id="hero"></div>
-
-<div class="stats-bar">
-  <div class="stat-cell"><div class="stat-val" id="s-km">0</div><div class="stat-lbl">km done</div></div>
-  <div class="stat-cell"><div class="stat-val" id="s-sessions">0</div><div class="stat-lbl">sessions</div></div>
-  <div class="stat-cell"><div class="stat-val" id="s-missed">0</div><div class="stat-lbl">missed</div></div>
+<div id="loading-screen">
+  <div class="load-title">Mossarun</div>
+  <div class="load-sub">Loading your plan…</div>
 </div>
 
-<div class="main">
-  <div class="app-title">
-    <div class="app-name">Mossarun</div>
-    <div class="app-sub">24H · Sep 4</div>
+<div id="app" style="display:none">
+  <div id="sync-bar" class="sync-bar synced"><div class="sync-dot"></div><span id="sync-txt">Synced</span></div>
+  <div class="hero" id="hero"></div>
+  <div class="stats-bar">
+    <div class="stat-cell"><div class="stat-val" id="s-km">0</div><div class="stat-lbl">km done</div></div>
+    <div class="stat-cell"><div class="stat-val" id="s-sessions">0</div><div class="stat-lbl">sessions</div></div>
+    <div class="stat-cell"><div class="stat-val" id="s-missed">0</div><div class="stat-lbl">missed</div></div>
   </div>
-  <div class="legend">
-    <span class="leg-item"><span class="leg-dot" style="background:#1a3028;outline:1px solid #8ab8a022"></span>Easy</span>
-    <span class="leg-item"><span class="leg-dot" style="background:#132820;outline:1px solid #8ab8a022"></span>Long</span>
-    <span class="leg-item"><span class="leg-dot" style="background:transparent;outline:1px solid rgba(138,184,160,0.35)"></span>Strength</span>
-    <span class="leg-item"><span class="leg-dot" style="background:#2a2210;outline:1px solid #c8963c22"></span>Tempo</span>
-    <span class="leg-item"><span class="leg-dot" style="background:#1a3028;outline:1px solid #6abf9022"></span>Intervals</span>
-    <span class="leg-item"><span class="leg-dot" style="background:#132820;outline:1px solid #8ab8a022"></span>Back-to-back</span>
-    <span class="leg-item"><span class="leg-dot" style="background:#141e2a;outline:1px solid #88aed422"></span>Night sim</span>
-    <span class="leg-item"><span class="leg-dot" style="background:#c8963c"></span>Race</span>
+  <div class="main">
+    <div class="app-title">
+      <div class="app-name">Mossarun</div>
+      <div class="app-sub">24H · Sep 4</div>
+    </div>
+    <div class="legend">
+      <span class="leg-item"><span class="leg-dot" style="background:#1a3028;outline:1px solid #8ab8a022"></span>Easy</span>
+      <span class="leg-item"><span class="leg-dot" style="background:#132820;outline:1px solid #8ab8a022"></span>Long</span>
+      <span class="leg-item"><span class="leg-dot" style="background:transparent;outline:1px solid rgba(138,184,160,0.35)"></span>Strength</span>
+      <span class="leg-item"><span class="leg-dot" style="background:#2a2210;outline:1px solid #c8963c22"></span>Tempo</span>
+      <span class="leg-item"><span class="leg-dot" style="background:#1a3028;outline:1px solid #6abf9022"></span>Intervals</span>
+      <span class="leg-item"><span class="leg-dot" style="background:#132820;outline:1px solid #8ab8a022"></span>Back-to-back</span>
+      <span class="leg-item"><span class="leg-dot" style="background:#141e2a;outline:1px solid #88aed422"></span>Night sim</span>
+      <span class="leg-item"><span class="leg-dot" style="background:#c8963c"></span>Race</span>
+    </div>
+    <div id="plan"></div>
   </div>
-  <div id="plan"></div>
 </div>
 
-<script>
-const STORAGE='mossarun_v6';
-const PLAN_START=new Date(2025,5,1);
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
 
-const TL={easy:'Easy run',long:'Long run',strength:'Strength',tempo:'Tempo',
-          rest:'Rest',back:'Back-to-back',race:'Race day',night:'Night sim',
-          incline:'Incline',nutrition:'Nutrition',intervals:'Intervals'};
+// ── FIREBASE INIT ──────────────────────────────────────────────────────────
+const firebaseConfig = {
+  apiKey: "AIzaSyCgedRAgFylbufa4yJDlkSfWZWuDa1qPk8",
+  authDomain: "ultra-training-9d35b.firebaseapp.com",
+  databaseURL: "https://ultra-training-9d35b-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "ultra-training-9d35b",
+  storageBucket: "ultra-training-9d35b.firebasestorage.app",
+  messagingSenderId: "915061613031",
+  appId: "1:915061613031:web:a822226a08cf7f692c9d42"
+};
 
-// ── PLAN DATA ────────────────────────────────────────────────────────────────
-// Quality sessions added / verified per phase:
-//   Phase 1: tempo introduced wk3, intervals wk3 Thu (2×1 km)
-//   Phase 2: tempo wk5 Tue (cruise intervals), intervals wk6 Thu (6×1 km),
-//             tempo wk7 Tue (progressive), no doubles in recovery weeks
-//   Phase 3: race-pace tempo wk9 Tue, intervals wk10 Thu (8×400m)
-//   Phase 4: maintenance sharpness wk11 Thu
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const STATE_REF = ref(db, 'mossarun_v6');
 
-const weeks=[
-/* ══ PHASE 1 ══════════════════════════════════════════════════════════════ */
-{ph:1,phLbl:'Phase 1',phCls:'ph-build',phDesc:'Base building',
- n:1,dates:'Jun 1–7',focus:'Establish rhythm & habits',kmCls:'km-green',kmLbl:'~46 km',kmVal:46,
- days:[
-  {id:'1-1',dow:0,lbl:'Mon',desc:'Easy run 8 km + Strength A (lower body: squats, lunges, hip thrusts, calf raises). Run outdoors first, strength after.',tags:['easy','strength'],km:8,nut:false},
-  {id:'1-2',dow:1,lbl:'Tue',desc:'Easy run 10 km at conversational pace. Eat a gel at 45 min — start building your nutrition habit.',tags:['easy'],km:10,nut:true},
-  {id:'1-3',dow:2,lbl:'Wed',desc:'Strength B — upper + core: rows, press, planks, dead bugs.',tags:['strength'],km:0,nut:false},
-  {id:'1-4',dow:3,lbl:'Thu',desc:'Incline session (gym/stairs, separate): 30 min at 8–10% incline, easy effort. Practice power hiking posture.',tags:['incline'],km:0,nut:false},
-  {id:'1-5',dow:4,lbl:'Fri',desc:'Easy run 10 km + Strength C (full body: deadlifts, step-ups, single-leg, loaded carries). Run outdoors first.',tags:['easy','strength'],km:10,nut:true},
-  {id:'1-6',dow:5,lbl:'Sat',desc:'Rest day. Walk, stretch, foam roll.',tags:['rest'],km:0,rest:true},
-  {id:'1-7',dow:6,lbl:'Sun',desc:'Long run 18 km easy — eat every 30 min, mix gels and real food. Log what sits well.',tags:['long'],km:18,nut:true},
- ],note:'Lock in habits: nutrition timing on runs, how combined run+strength days feel, which foods work. Everything this week is information.'},
-
-{ph:1,phLbl:'Phase 1',phCls:'ph-build',phDesc:'Base building',
- n:2,dates:'Jun 8–14',focus:'First back-to-back',kmCls:'km-green',kmLbl:'~63 km',kmVal:63,
- days:[
-  {id:'2-1',dow:0,lbl:'Mon',desc:'Easy run 10 km + Strength A. Run outdoors first.',tags:['easy','strength'],km:10,nut:false},
-  {id:'2-2',dow:1,lbl:'Tue',desc:'Easy run 10 km.',tags:['easy'],km:10,nut:false},
-  {id:'2-3',dow:2,lbl:'Wed',desc:'Strength B — upper + core.',tags:['strength'],km:0,nut:false},
-  {id:'2-4',dow:3,lbl:'Thu',desc:'Incline session (gym/stairs): 40 min — 2 min easy walk / 2 min run at 8%, repeat. Practice eating a snack mid-session.',tags:['incline'],km:0,nut:true},
-  {id:'2-5',dow:4,lbl:'Fri',desc:'Easy run 8 km + Strength C (full body: deadlifts, step-ups, single-leg, loaded carries). Eat real food mid-run (banana, sandwich). Run first.',tags:['easy','strength'],km:8,nut:true},
-  {id:'2-6',dow:5,lbl:'Sat',desc:'Back-to-back day 1: Easy run 15 km — keep the effort truly easy, this is about time on feet. Eat normally throughout the day after.',tags:['back'],km:15,nut:true},
-  {id:'2-7',dow:6,lbl:'Sun',desc:'Back-to-back day 2: 20 km easy — the "tired legs" run. This is the point: running on accumulated fatigue. Eat at km 5, 10, 15 even if not hungry.',tags:['back'],km:20,nut:true},
- ],note:"Saturday + Sunday are your first true back-to-back. Saturday is a primer — keep it easy. Sunday is where the training happens: running on tired legs. Honest easy pace only, walk if needed."},
-
-{ph:1,phLbl:'Phase 1',phCls:'ph-build',phDesc:'Base building',
- n:3,dates:'Jun 15–21',focus:'First tempo + intervals',kmCls:'km-green',kmLbl:'~54 km',kmVal:54,
- days:[
-  {id:'3-1',dow:0,lbl:'Mon',desc:'Easy run 8 km. First day after the back-to-back weekend — legs need to flush, not lift. Strength resumes Wednesday.',tags:['easy'],km:8,nut:false},
-  {id:'3-2',dow:1,lbl:'Tue',desc:'Tempo run — 12 km total: 2 km warm-up, 4×8 min at comfortably hard (threshold) effort with 90 sec jog recovery, 2 km cool-down. Gel before the first rep.',tags:['tempo'],km:12,nut:true},
-  {id:'3-3',dow:2,lbl:'Wed',desc:'Strength A.',tags:['strength'],km:0,nut:false},
-  {id:'3-4',dow:3,lbl:'Thu',desc:'Intervals — 10 km total: 2 km warm-up, 2×1 km at hard effort (5K race pace) with 2 min walk recovery, 2 km cool-down. Short but sharp — first interval session.',tags:['intervals'],km:10,nut:false},
-  {id:'3-5',dow:4,lbl:'Fri',desc:'Incline session (gym/stairs): 40 min steady at 10%. Practice power hiking — fast, upright posture. Then Strength B — upper + core, kept brief.',tags:['incline','strength'],km:0,nut:false},
-  {id:'3-6',dow:5,lbl:'Sat',desc:'Rest day.',tags:['rest'],km:0,rest:true},
-  {id:'3-7',dow:6,lbl:'Sun',desc:'Long run 25 km easy — repeat a short loop several times to train loop psychology. Eat every 40 min, mix gels with real food.',tags:['long'],km:25,nut:true},
- ],note:'Two quality sessions this week but they are well separated (Tue/Thu) with easy volume around them. The interval session is deliberately short — the goal is neuromuscular stimulus, not suffering.'},
-
-{ph:1,phLbl:'Phase 1',phCls:'ph-build',phDesc:'Base building',
- n:4,dates:'Jun 22–28',focus:'Recovery week',kmCls:'km-gray',kmLbl:'~35 km',kmVal:35,
- days:[
-  {id:'4-1',dow:0,lbl:'Mon',desc:'Strength A — 60% effort only.',tags:['strength'],km:0,nut:false},
-  {id:'4-2',dow:1,lbl:'Tue',desc:'Easy run 8 km.',tags:['easy'],km:8,nut:false},
-  {id:'4-3',dow:2,lbl:'Wed',desc:'Strength B — reduced.',tags:['strength'],km:0,nut:false},
-  {id:'4-4',dow:3,lbl:'Thu',desc:'Easy run 10 km flat, no intensity.',tags:['easy'],km:10,nut:false},
-  {id:'4-5',dow:4,lbl:'Fri',desc:'Light incline walk 30 min or full rest.',tags:['rest'],km:0,rest:true},
-  {id:'4-6',dow:5,lbl:'Sat',desc:'Rest day.',tags:['rest'],km:0,rest:true},
-  {id:'4-7',dow:6,lbl:'Sun',desc:'Long run 18 km — relaxed, no pressure, no intensity.',tags:['long'],km:18,nut:false},
- ],note:'Recovery weeks are not optional. Adaptation happens here. Do not skip.'},
-
-/* ══ PHASE 2 ══════════════════════════════════════════════════════════════ */
-{ph:2,phLbl:'Phase 2',phCls:'ph-develop',phDesc:'Development',
- n:5,dates:'Jun 29–Jul 5',focus:'Cruise intervals, bigger volume',kmCls:'km-blue',kmLbl:'~73 km',kmVal:73,
- days:[
-  {id:'5-1',dow:0,lbl:'Mon',desc:'Easy run 10 km + Strength A. Fresh after the recovery week — big volume week ahead, start strong.',tags:['easy','strength'],km:10,nut:false},
-  {id:'5-2',dow:1,lbl:'Tue',desc:'Cruise intervals — 14 km total: 2 km warm-up, 3×2 km at threshold pace with 1 min jog recovery, 2 km cool-down. Gel before and mid-session. These are steady, not sprint efforts.',tags:['intervals'],km:14,nut:true},
-  {id:'5-3',dow:2,lbl:'Wed',desc:'Strength B.',tags:['strength'],km:0,nut:false},
-  {id:'5-4',dow:3,lbl:'Thu',desc:'Incline session (gym/stairs): 50 min alternating 2 min run / 3 min power hike at 10%. Eat a snack mid-session.',tags:['incline'],km:0,nut:true},
-  {id:'5-5',dow:4,lbl:'Fri',desc:'Easy run 6 km + Strength C (full body: deadlifts, step-ups, single-leg, loaded carries). Keep both efforts controlled — back-to-back starts tomorrow.',tags:['easy','strength'],km:6,nut:false},
-  {id:'5-6',dow:5,lbl:'Sat',desc:'Back-to-back day 1: Easy run 18 km — prep your race-day nutrition kit at home after. Keep effort easy; this is a primer.',tags:['back'],km:18,nut:true},
-  {id:'5-7',dow:6,lbl:'Sun',desc:'Back-to-back day 2: 25 km easy — full nutrition protocol, real food + gel alternating every 45 min. Running on Saturday legs is the stimulus.',tags:['back'],km:25,nut:true},
- ],note:'Cruise intervals build lactate threshold without the brutality of shorter reps. Back-to-back weekend: Saturday loads the legs, Sunday teaches you to run through fatigue.'},
-
-{ph:2,phLbl:'Phase 2',phCls:'ph-develop',phDesc:'Development',
- n:6,dates:'Jul 6–12',focus:'First 30+ km long run',kmCls:'km-blue',kmLbl:'~64 km',kmVal:64,
- days:[
-  {id:'6-1',dow:0,lbl:'Mon',desc:'Easy run 8 km. Recovery from the back-to-back weekend — let the adaptation from Saturday and Sunday settle before loading again. Strength resumes Wednesday.',tags:['easy'],km:8,nut:false},
-  {id:'6-2',dow:1,lbl:'Tue',desc:'Tempo run — 14 km total: 2 km warm-up, 5×7 min at threshold with 90 sec jog recovery, cool-down. Gel before each rep.',tags:['tempo'],km:14,nut:true},
-  {id:'6-3',dow:2,lbl:'Wed',desc:'Strength A.',tags:['strength'],km:0,nut:false},
-  {id:'6-4',dow:3,lbl:'Thu',desc:'Intervals — 12 km total: 2 km warm-up, 6×1 km at hard effort with 90 sec walk recovery, 2 km cool-down. Focus on even pacing across all 6 reps.',tags:['intervals'],km:12,nut:false},
-  {id:'6-5',dow:4,lbl:'Fri',desc:'Incline session (gym/stairs): 50 min steady at 10–12%. No running — pure power hiking.',tags:['incline'],km:0,nut:false},
-  {id:'6-6',dow:5,lbl:'Sat',desc:'Rest day. Eat well and sleep — big run tomorrow.',tags:['rest'],km:0,rest:true},
-  {id:'6-7',dow:6,lbl:'Sun',desc:'Long run 32 km — loop the same route twice. Eat every 40 min. After km 20, switch to savoury food (potatoes, bread + salt, rice). Notice when sweet stops being appealing.',tags:['long'],km:32,nut:true},
- ],note:'The sweet-to-savoury transition usually hits between km 20–25. Finding that threshold in training means you manage it deliberately on race day.'},
-
-{ph:2,phLbl:'Phase 2',phCls:'ph-develop',phDesc:'Development',
- n:7,dates:'Jul 13–19',focus:'Night simulation #1 — wake at 2AM',kmCls:'km-blue',kmLbl:'~60 km',kmVal:60,
- days:[
-  {id:'7-1',dow:0,lbl:'Mon',desc:'Easy run 8 km. Keep it easy — big night simulation coming at the end of this week.',tags:['easy'],km:8,nut:false},
-  {id:'7-2',dow:1,lbl:'Tue',desc:'Progressive tempo — 13 km total: 3 km easy, 3 km at marathon pace, 3 km at threshold, 1 km easy cool-down. Each segment faster than the last.',tags:['tempo'],km:13,nut:true},
-  {id:'7-3',dow:2,lbl:'Wed',desc:'Strength A.',tags:['strength'],km:0,nut:false},
-  {id:'7-4',dow:3,lbl:'Thu',desc:'Incline session (gym/stairs): 60 min — 2 min run / 3 min power hike at 10–12%. Eat mid-session.',tags:['incline'],km:0,nut:true},
-  {id:'7-5',dow:4,lbl:'Fri',desc:'Easy run 6 km + Strength B (full body: deadlifts, step-ups, single-leg, loaded carries).',tags:['easy','strength'],km:6,nut:false},
-  {id:'7-6',dow:5,lbl:'Sat',desc:'Rest. Sleep at normal time — alarm is set for 2AM tonight. Lay out full race kit before bed.',tags:['rest'],km:0,rest:true},
-  {id:'7-7',dow:6,lbl:'Sun',desc:'NIGHT SIM + DOUBLE: (1) Wake 2AM — eat a small snack, run 17 km in the dark with headlamp and full race kit. Return home and sleep. (2) Later that afternoon: 15 km easy to simulate continuing after a night loop. Two runs, one day — this is the hardest single day of Phase 2.',tags:['night','back'],km:32,nut:true},
- ],note:'Night sim questions: can you eat in the dark? Does your stomach behave when your body clock says sleep? Is your headlamp bright enough past 90 min? The afternoon 15 km exposes how you function post-night-loop — the most common DNF window in 24h races.'},
-
-{ph:2,phLbl:'Phase 2',phCls:'ph-develop',phDesc:'Development',
- n:8,dates:'Jul 20–26',focus:'Recovery week',kmCls:'km-gray',kmLbl:'~38 km',kmVal:38,
- days:[
-  {id:'8-1',dow:0,lbl:'Mon',desc:'Easy walk or full rest. After the night simulation and back-to-back, this is genuine recovery — no running, no lifting. Eat well.',tags:['rest'],km:0,rest:true},
-  {id:'8-2',dow:1,lbl:'Tue',desc:'Easy run 8 km.',tags:['easy'],km:8,nut:false},
-  {id:'8-3',dow:2,lbl:'Wed',desc:'Strength A — reduced.',tags:['strength'],km:0,nut:false},
-  {id:'8-4',dow:3,lbl:'Thu',desc:'Easy run 10 km flat.',tags:['easy'],km:10,nut:false},
-  {id:'8-5',dow:4,lbl:'Fri',desc:'Strength B — kept light to match the recovery nature of this week.',tags:['strength'],km:0,nut:false},
-  {id:'8-6',dow:5,lbl:'Sat',desc:'Rest day.',tags:['rest'],km:0,rest:true},
-  {id:'8-7',dow:6,lbl:'Sun',desc:'Long run 20 km easy.',tags:['long'],km:20,nut:false},
- ],note:'Let the night sim and big weeks absorb. Review your nutrition log — adjust anything that did not sit well in the dark.'},
-
-/* ══ PHASE 3 ══════════════════════════════════════════════════════════════ */
-{ph:3,phLbl:'Phase 3',phCls:'ph-peak',phDesc:'Peak training',
- n:9,dates:'Jul 27–Aug 2',focus:'Peak volume — biggest back-to-back',kmCls:'km-amber',kmLbl:'~94 km',kmVal:94,
- days:[
-  {id:'9-1',dow:0,lbl:'Mon',desc:'Easy run 10 km. Peak week — the biggest back-to-back of the plan is on Saturday and Sunday. Start the week fresh and controlled.',tags:['easy'],km:10,nut:false},
-  {id:'9-2',dow:1,lbl:'Tue',desc:'Race-pace tempo — 14 km total: 2 km warm-up, 2×20 min at your target comfortable race pace (the effort you can sustain all day), 2 km cool-down. This is not threshold — it is long race effort.',tags:['tempo'],km:14,nut:true},
-  {id:'9-3',dow:2,lbl:'Wed',desc:'Strength A (moderate — protect legs for the weekend).',tags:['strength'],km:0,nut:false},
-  {id:'9-4',dow:3,lbl:'Thu',desc:'Easy run 10 km. Rest fully after — eat well all day.',tags:['easy'],km:10,nut:true},
-  {id:'9-5',dow:4,lbl:'Fri',desc:'Strength B. Keep it brief — the biggest back-to-back of the plan starts tomorrow. Pack your race kit after, sleep early.',tags:['strength'],km:0,nut:false},
-  {id:'9-6',dow:5,lbl:'Sat',desc:'Back-to-back day 1: 35 km — full race simulation. Eat every 40 min, walk all climbs, start late afternoon to run into the evening with headlamp.',tags:['back'],km:35,nut:true},
-  {id:'9-7',dow:6,lbl:'Sun',desc:'Back-to-back day 2: 25 km easy — the key session of the entire plan. Running deep into fatigue is the point. Eat even when you do not feel like it.',tags:['back'],km:25,nut:true},
- ],note:'Hardest weekend of the plan. Sunday will not feel good — that is correct. Completing it over pacing is the goal. Brief your support person on race-day roles this week.'},
-
-{ph:3,phLbl:'Phase 3',phCls:'ph-peak',phDesc:'Peak training',
- n:10,dates:'Aug 3–9',focus:'Night simulation #2 — pre-dawn',kmCls:'km-amber',kmLbl:'~82 km',kmVal:82,
- days:[
-  {id:'10-1',dow:0,lbl:'Mon',desc:'Easy run 14 km. Recovery after the back-to-back — no strength today, let Sunday\'s work settle. Keep the pace truly easy.',tags:['easy'],km:14,nut:false},
-  {id:'10-2',dow:1,lbl:'Tue',desc:'Easy run 16 km.',tags:['easy'],km:16,nut:false},
-  {id:'10-3',dow:2,lbl:'Wed',desc:'Strength A.',tags:['strength'],km:0,nut:false},
-  {id:'10-4',dow:3,lbl:'Thu',desc:'Intervals — 12 km total: 2 km warm-up, 8×400m at hard effort with 200m walk recovery, 2 km cool-down. Sharpening speed without accumulating fatigue before peak weekend.',tags:['intervals'],km:12,nut:false},
-  {id:'10-5',dow:4,lbl:'Fri',desc:'Strength B. Keep it short — big night simulation starts early Saturday morning.',tags:['strength'],km:0,nut:false},
-  {id:'10-6',dow:5,lbl:'Sat',desc:'NIGHT SIM #2: Wake 4:30AM. Small snack, run 18 km pre-dawn in full race kit. Bring thermos of warm broth or ramen — eat mid-run.',tags:['night'],km:18,nut:true},
-  {id:'10-7',dow:6,lbl:'Sun',desc:'Back-to-back 22 km easy — full gear, real food at halfway. Simulate a loop return at your support station. Running on night-sim legs is the point.',tags:['back'],km:22,nut:true},
- ],note:'Pre-dawn is the hardest psychological window of a 24h race regardless of start time. Warm savoury food in the dark is a skill. Practise it now.'},
-
-/* ══ PHASE 4 ══════════════════════════════════════════════════════════════ */
-{ph:4,phLbl:'Phase 4',phCls:'ph-taper',phDesc:'Taper',
- n:11,dates:'Aug 10–16',focus:'Volume down, sharpness stays',kmCls:'km-red',kmLbl:'~45 km',kmVal:45,
- days:[
-  {id:'11-1',dow:0,lbl:'Mon',desc:'Easy run 8 km. After Sunday\'s back-to-back, the body needs one clear day before any loading. Strength resumes Wednesday.',tags:['easy'],km:8,nut:false},
-  {id:'11-2',dow:1,lbl:'Tue',desc:'Easy run 10 km.',tags:['easy'],km:10,nut:false},
-  {id:'11-3',dow:2,lbl:'Wed',desc:'Strength A.',tags:['strength'],km:0,nut:false},
-  {id:'11-4',dow:3,lbl:'Thu',desc:'Sharpener — 10 km total: 2 km warm-up, 3×5 min at threshold effort with 90 sec jog recovery, 2 km cool-down. Enough to stay sharp, not enough to dig a hole.',tags:['tempo'],km:10,nut:false},
-  {id:'11-5',dow:4,lbl:'Fri',desc:'Strength B — light (2× per week from here: Wed + Fri). Drop to 60% effort, this is maintenance only.',tags:['strength'],km:0,nut:false},
-  {id:'11-6',dow:5,lbl:'Sat',desc:'Rest day. Finalise race-day food list with your support person.',tags:['rest'],km:0,rest:true},
-  {id:'11-7',dow:6,lbl:'Sun',desc:'Long run 25 km easy — last meaningful long run.',tags:['long'],km:25,nut:false},
- ],note:'Finalise the race-day nutrition list and brief your support person on what warm food to have ready each loop return.'},
-
-{ph:4,phLbl:'Phase 4',phCls:'ph-taper',phDesc:'Taper',
- n:12,dates:'Aug 17–23',focus:'Sharp taper — freshen legs',kmCls:'km-red',kmLbl:'~35 km',kmVal:35,
- days:[
-  {id:'12-1',dow:0,lbl:'Mon',desc:'Strength A — light maintenance only.',tags:['strength'],km:0,nut:false},
-  {id:'12-2',dow:1,lbl:'Tue',desc:'Easy run 8 km.',tags:['easy'],km:8,nut:false},
-  {id:'12-3',dow:2,lbl:'Wed',desc:'Rest or easy walk.',tags:['rest'],km:0,rest:true},
-  {id:'12-4',dow:3,lbl:'Thu',desc:'Easy run 8 km.',tags:['easy'],km:8,nut:false},
-  {id:'12-5',dow:4,lbl:'Fri',desc:'Strength B — light.',tags:['strength'],km:0,nut:false},
-  {id:'12-6',dow:5,lbl:'Sat',desc:'Rest day. Full support person briefing — kit, food, what "pull me out" vs "bad patch" looks like for you.',tags:['rest'],km:0,rest:true},
-  {id:'12-7',dow:6,lbl:'Sun',desc:'Long run 18 km easy — last big run. Enjoy it.',tags:['long'],km:18,nut:false},
- ],note:'Taper madness is real — feeling sluggish or anxious is expected. Fitness is locked in. Trust the process.'},
-
-{ph:4,phLbl:'Phase 4',phCls:'ph-taper',phDesc:'Taper',
- n:13,dates:'Aug 25–Sep 4',focus:'Race week — conserve everything',kmCls:'km-gray',kmLbl:'~15 km + Race',kmVal:0,
- days:[
-  {id:'13-1',dow:0,lbl:'Mon Aug 25',desc:'Easy run 5 km just to move.',tags:['easy'],km:5,nut:false},
-  {id:'13-2',dow:1,lbl:'Tue Aug 26',desc:'Rest. Finalise kit checklist.',tags:['rest'],km:0,rest:true},
-  {id:'13-3',dow:2,lbl:'Wed Aug 27',desc:'Easy run 5 km with 4 strides. Nothing more.',tags:['easy'],km:5,nut:false},
-  {id:'13-4',dow:3,lbl:'Thu Aug 28',desc:'Rest. Sleep well, hydrate, eat normally.',tags:['rest'],km:0,rest:true},
-  {id:'13-5',dow:4,lbl:'Fri Aug 29',desc:'Shake-out run 5 km — that is it.',tags:['easy'],km:5,nut:false},
-  {id:'13-6',dow:5,lbl:'Sat Aug 30–Wed Sep 3',desc:'Complete rest, travel, logistics, sleep.',tags:['rest'],km:0,rest:true},
-  {id:'13-7',dow:6,lbl:'Thu Sep 4',desc:'MOSSARUN 24H. Start conservatively. First 6 hrs feel embarrassingly easy. Walk all climbs from loop 1. Eat real food every loop return. Your support person is your anchor.',tags:['race'],km:0,nut:true},
- ],note:'Race: plan for a low point at 3–4AM regardless of start time. Warm savoury food + dry socks every loop. Start time is a surprise — be ready at any hour.'},
-];
+// ── SYNC STATUS ────────────────────────────────────────────────────────────
+function setSyncStatus(status, text) {
+  const bar = document.getElementById('sync-bar');
+  const txt = document.getElementById('sync-txt');
+  if (!bar || !txt) return;
+  bar.className = 'sync-bar ' + status;
+  txt.textContent = text;
+}
 
 // ── STATE ──────────────────────────────────────────────────────────────────
-let S={};
-try{S=JSON.parse(localStorage.getItem(STORAGE)||'{}');}catch(e){}
-const save=()=>{try{localStorage.setItem(STORAGE,JSON.stringify(S));}catch(e){}};
-const ds=id=>S[id]||'none';
+let S = {};
+let saveTimeout = null;
+let remoteListenerActive = false;
 
-function cycle(id){const c=ds(id);S[id]=c==='none'?'done':c==='done'?'missed':'none';save();render();}
-function markMissed(id){S[id]=ds(id)==='missed'?'none':'missed';save();render();}
-
-// ── REORDER STATE ──────────────────────────────────────────────────────────
-// S['order_'+week.n] = [0,1,2,...] index array into week.days
-function getOrder(week){
-  const o=S['order_'+week.n];
-  if(o&&o.length===week.days.length)return o;
-  return week.days.map((_,i)=>i);
+// Debounced save — batches rapid taps into a single write
+function save() {
+  setSyncStatus('syncing', 'Saving…');
+  clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(() => {
+    set(STATE_REF, S)
+      .then(() => setSyncStatus('synced', 'Synced'))
+      .catch(() => setSyncStatus('error', 'Save failed — check connection'));
+  }, 600);
 }
-function saveOrder(week,order){S['order_'+week.n]=order;save();}
-function getOrderedDays(week){return getOrder(week).map(i=>week.days[i]);}
 
-// ── CONFLICT DETECTION ────────────────────────────────────────────────────
-function hasStrength(day){return day.tags.includes('strength');}
-function getConflicts(week){
-  // Returns Set of day ids that are adjacent to another strength day
-  const days=getOrderedDays(week);
-  const conflicts=new Set();
-  for(let i=0;i<days.length-1;i++){
-    if(hasStrength(days[i])&&hasStrength(days[i+1])){
-      conflicts.add(days[i].id);
-      conflicts.add(days[i+1].id);
+// ── LOAD FROM FIREBASE, THEN RENDER ───────────────────────────────────────
+onValue(STATE_REF, (snapshot) => {
+  const data = snapshot.val();
+  if (data) {
+    S = data;
+  }
+  // Hide loading screen and show app on first load
+  if (!remoteListenerActive) {
+    remoteListenerActive = true;
+    document.getElementById('loading-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+  }
+  render();
+}, (error) => {
+  setSyncStatus('error', 'Connection error');
+  document.getElementById('loading-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  render();
+});
+
+// ── PLAN DATA ──────────────────────────────────────────────────────────────
+const PLAN_START = new Date(2025,5,1);
+const TL = {easy:'Easy run',long:'Long run',strength:'Strength',tempo:'Tempo',
+  rest:'Rest',back:'Back-to-back',race:'Race day',night:'Night sim',
+  incline:'Incline',nutrition:'Nutrition',intervals:'Intervals'};
+
+const weeks=[
+{ph:1,phLbl:'Phase 1',phCls:'ph-build',phDesc:'Base building',
+n:1,dates:'Jun 1–7',focus:'Establish rhythm & habits',kmCls:'km-green',kmLbl:'~46 km',kmVal:46,
+days:[
+{id:'1-1',dow:0,lbl:'Mon',desc:'Easy run 8 km + Strength A (lower body: squats, lunges, hip thrusts, calf raises). Run outdoors first, strength after.',tags:['easy','strength'],km:8,nut:false},
+{id:'1-2',dow:1,lbl:'Tue',desc:'Easy run 10 km at conversational pace. Eat a gel at 45 min — start building your nutrition habit.',tags:['easy'],km:10,nut:true},
+{id:'1-3',dow:2,lbl:'Wed',desc:'Strength B — upper + core: rows, press, planks, dead bugs.',tags:['strength'],km:0,nut:false},
+{id:'1-4',dow:3,lbl:'Thu',desc:'Incline session (gym/stairs, separate): 30 min at 8–10% incline, easy effort. Practice power hiking posture.',tags:['incline'],km:0,nut:false},
+{id:'1-5',dow:4,lbl:'Fri',desc:'Easy run 10 km + Strength C (full body: deadlifts, step-ups, single-leg, loaded carries). Run outdoors first.',tags:['easy','strength'],km:10,nut:true},
+{id:'1-6',dow:5,lbl:'Sat',desc:'Rest day. Walk, stretch, foam roll.',tags:['rest'],km:0,rest:true},
+{id:'1-7',dow:6,lbl:'Sun',desc:'Long run 18 km easy — eat every 30 min, mix gels and real food. Log what sits well.',tags:['long'],km:18,nut:true},
+],note:'Lock in habits: nutrition timing on runs, how combined run+strength days feel, which foods work. Everything this week is information.'},
+{ph:1,phLbl:'Phase 1',phCls:'ph-build',phDesc:'Base building',
+n:2,dates:'Jun 8–14',focus:'First back-to-back',kmCls:'km-green',kmLbl:'~63 km',kmVal:63,
+days:[
+{id:'2-1',dow:0,lbl:'Mon',desc:'Easy run 10 km + Strength A. Run outdoors first.',tags:['easy','strength'],km:10,nut:false},
+{id:'2-2',dow:1,lbl:'Tue',desc:'Easy run 10 km.',tags:['easy'],km:10,nut:false},
+{id:'2-3',dow:2,lbl:'Wed',desc:'Strength B — upper + core.',tags:['strength'],km:0,nut:false},
+{id:'2-4',dow:3,lbl:'Thu',desc:'Incline session (gym/stairs): 40 min — 2 min easy walk / 2 min run at 8%, repeat. Practice eating a snack mid-session.',tags:['incline'],km:0,nut:true},
+{id:'2-5',dow:4,lbl:'Fri',desc:'Easy run 8 km + Strength C (full body: deadlifts, step-ups, single-leg, loaded carries). Eat real food mid-run (banana, sandwich). Run first.',tags:['easy','strength'],km:8,nut:true},
+{id:'2-6',dow:5,lbl:'Sat',desc:'Back-to-back day 1: Easy run 15 km — keep the effort truly easy, this is about time on feet. Eat normally throughout the day after.',tags:['back'],km:15,nut:true},
+{id:'2-7',dow:6,lbl:'Sun',desc:'Back-to-back day 2: 20 km easy — the "tired legs" run. This is the point: running on accumulated fatigue. Eat at km 5, 10, 15 even if not hungry.',tags:['back'],km:20,nut:true},
+],note:"Saturday + Sunday are your first true back-to-back. Saturday is a primer — keep it easy. Sunday is where the training happens: running on tired legs. Honest easy pace only, walk if needed."},
+{ph:1,phLbl:'Phase 1',phCls:'ph-build',phDesc:'Base building',
+n:3,dates:'Jun 15–21',focus:'First tempo + intervals',kmCls:'km-green',kmLbl:'~54 km',kmVal:54,
+days:[
+{id:'3-1',dow:0,lbl:'Mon',desc:'Easy run 8 km. First day after the back-to-back weekend — legs need to flush, not lift. Strength resumes Wednesday.',tags:['easy'],km:8,nut:false},
+{id:'3-2',dow:1,lbl:'Tue',desc:'Tempo run — 12 km total: 2 km warm-up, 4×8 min at comfortably hard (threshold) effort with 90 sec jog recovery, 2 km cool-down. Gel before the first rep.',tags:['tempo'],km:12,nut:true},
+{id:'3-3',dow:2,lbl:'Wed',desc:'Strength A.',tags:['strength'],km:0,nut:false},
+{id:'3-4',dow:3,lbl:'Thu',desc:'Intervals — 10 km total: 2 km warm-up, 2×1 km at hard effort (5K race pace) with 2 min walk recovery, 2 km cool-down. Short but sharp — first interval session.',tags:['intervals'],km:10,nut:false},
+{id:'3-5',dow:4,lbl:'Fri',desc:'Incline session (gym/stairs): 40 min steady at 10%. Practice power hiking — fast, upright posture. Then Strength B — upper + core, kept brief.',tags:['incline','strength'],km:0,nut:false},
+{id:'3-6',dow:5,lbl:'Sat',desc:'Rest day.',tags:['rest'],km:0,rest:true},
+{id:'3-7',dow:6,lbl:'Sun',desc:'Long run 25 km easy — repeat a short loop several times to train loop psychology. Eat every 40 min, mix gels with real food.',tags:['long'],km:25,nut:true},
+],note:'Two quality sessions this week but they are well separated (Tue/Thu) with easy volume around them. The interval session is deliberately short — the goal is neuromuscular stimulus, not suffering.'},
+{ph:1,phLbl:'Phase 1',phCls:'ph-build',phDesc:'Base building',
+n:4,dates:'Jun 22–28',focus:'Recovery week',kmCls:'km-gray',kmLbl:'~35 km',kmVal:35,
+days:[
+{id:'4-1',dow:0,lbl:'Mon',desc:'Strength A — 60% effort only.',tags:['strength'],km:0,nut:false},
+{id:'4-2',dow:1,lbl:'Tue',desc:'Easy run 8 km.',tags:['easy'],km:8,nut:false},
+{id:'4-3',dow:2,lbl:'Wed',desc:'Strength B — reduced.',tags:['strength'],km:0,nut:false},
+{id:'4-4',dow:3,lbl:'Thu',desc:'Easy run 10 km flat, no intensity.',tags:['easy'],km:10,nut:false},
+{id:'4-5',dow:4,lbl:'Fri',desc:'Light incline walk 30 min or full rest.',tags:['rest'],km:0,rest:true},
+{id:'4-6',dow:5,lbl:'Sat',desc:'Rest day.',tags:['rest'],km:0,rest:true},
+{id:'4-7',dow:6,lbl:'Sun',desc:'Long run 18 km — relaxed, no pressure, no intensity.',tags:['long'],km:18,nut:false},
+],note:'Recovery weeks are not optional. Adaptation happens here. Do not skip.'},
+{ph:2,phLbl:'Phase 2',phCls:'ph-develop',phDesc:'Development',
+n:5,dates:'Jun 29–Jul 5',focus:'Cruise intervals, bigger volume',kmCls:'km-blue',kmLbl:'~73 km',kmVal:73,
+days:[
+{id:'5-1',dow:0,lbl:'Mon',desc:'Easy run 10 km + Strength A. Fresh after the recovery week — big volume week ahead, start strong.',tags:['easy','strength'],km:10,nut:false},
+{id:'5-2',dow:1,lbl:'Tue',desc:'Cruise intervals — 14 km total: 2 km warm-up, 3×2 km at threshold pace with 1 min jog recovery, 2 km cool-down. Gel before and mid-session. These are steady, not sprint efforts.',tags:['intervals'],km:14,nut:true},
+{id:'5-3',dow:2,lbl:'Wed',desc:'Strength B.',tags:['strength'],km:0,nut:false},
+{id:'5-4',dow:3,lbl:'Thu',desc:'Incline session (gym/stairs): 50 min alternating 2 min run / 3 min power hike at 10%. Eat a snack mid-session.',tags:['incline'],km:0,nut:true},
+{id:'5-5',dow:4,lbl:'Fri',desc:'Easy run 6 km + Strength C (full body: deadlifts, step-ups, single-leg, loaded carries). Keep both efforts controlled — back-to-back starts tomorrow.',tags:['easy','strength'],km:6,nut:false},
+{id:'5-6',dow:5,lbl:'Sat',desc:'Back-to-back day 1: Easy run 18 km — prep your race-day nutrition kit at home after. Keep effort easy; this is a primer.',tags:['back'],km:18,nut:true},
+{id:'5-7',dow:6,lbl:'Sun',desc:'Back-to-back day 2: 25 km easy — full nutrition protocol, real food + gel alternating every 45 min. Running on Saturday legs is the stimulus.',tags:['back'],km:25,nut:true},
+],note:'Cruise intervals build lactate threshold without the brutality of shorter reps. Back-to-back weekend: Saturday loads the legs, Sunday teaches you to run through fatigue.'},
+{ph:2,phLbl:'Phase 2',phCls:'ph-develop',phDesc:'Development',
+n:6,dates:'Jul 6–12',focus:'First 30+ km long run',kmCls:'km-blue',kmLbl:'~64 km',kmVal:64,
+days:[
+{id:'6-1',dow:0,lbl:'Mon',desc:'Easy run 8 km. Recovery from the back-to-back weekend — let the adaptation from Saturday and Sunday settle before loading again. Strength resumes Wednesday.',tags:['easy'],km:8,nut:false},
+{id:'6-2',dow:1,lbl:'Tue',desc:'Tempo run — 14 km total: 2 km warm-up, 5×7 min at threshold with 90 sec jog recovery, cool-down. Gel before each rep.',tags:['tempo'],km:14,nut:true},
+{id:'6-3',dow:2,lbl:'Wed',desc:'Strength A.',tags:['strength'],km:0,nut:false},
+{id:'6-4',dow:3,lbl:'Thu',desc:'Intervals — 12 km total: 2 km warm-up, 6×1 km at hard effort with 90 sec walk recovery, 2 km cool-down. Focus on even pacing across all 6 reps.',tags:['intervals'],km:12,nut:false},
+{id:'6-5',dow:4,lbl:'Fri',desc:'Incline session (gym/stairs): 50 min steady at 10–12%. No running — pure power hiking.',tags:['incline'],km:0,nut:false},
+{id:'6-6',dow:5,lbl:'Sat',desc:'Rest day. Eat well and sleep — big run tomorrow.',tags:['rest'],km:0,rest:true},
+{id:'6-7',dow:6,lbl:'Sun',desc:'Long run 32 km — loop the same route twice. Eat every 40 min. After km 20, switch to savoury food (potatoes, bread + salt, rice). Notice when sweet stops being appealing.',tags:['long'],km:32,nut:true},
+],note:'The sweet-to-savoury transition usually hits between km 20–25. Finding that threshold in training means you manage it deliberately on race day.'},
+{ph:2,phLbl:'Phase 2',phCls:'ph-develop',phDesc:'Development',
+n:7,dates:'Jul 13–19',focus:'Night simulation #1 — wake at 2AM',kmCls:'km-blue',kmLbl:'~60 km',kmVal:60,
+days:[
+{id:'7-1',dow:0,lbl:'Mon',desc:'Easy run 8 km. Keep it easy — big night simulation coming at the end of this week.',tags:['easy'],km:8,nut:false},
+{id:'7-2',dow:1,lbl:'Tue',desc:'Progressive tempo — 13 km total: 3 km easy, 3 km at marathon pace, 3 km at threshold, 1 km easy cool-down. Each segment faster than the last.',tags:['tempo'],km:13,nut:true},
+{id:'7-3',dow:2,lbl:'Wed',desc:'Strength A.',tags:['strength'],km:0,nut:false},
+{id:'7-4',dow:3,lbl:'Thu',desc:'Incline session (gym/stairs): 60 min — 2 min run / 3 min power hike at 10–12%. Eat mid-session.',tags:['incline'],km:0,nut:true},
+{id:'7-5',dow:4,lbl:'Fri',desc:'Easy run 6 km + Strength B (full body: deadlifts, step-ups, single-leg, loaded carries).',tags:['easy','strength'],km:6,nut:false},
+{id:'7-6',dow:5,lbl:'Sat',desc:'Rest. Sleep at normal time — alarm is set for 2AM tonight. Lay out full race kit before bed.',tags:['rest'],km:0,rest:true},
+{id:'7-7',dow:6,lbl:'Sun',desc:'NIGHT SIM + DOUBLE: (1) Wake 2AM — eat a small snack, run 17 km in the dark with headlamp and full race kit. Return home and sleep. (2) Later that afternoon: 15 km easy to simulate continuing after a night loop. Two runs, one day — this is the hardest single day of Phase 2.',tags:['night','back'],km:32,nut:true},
+],note:'Night sim questions: can you eat in the dark? Does your stomach behave when your body clock says sleep? Is your headlamp bright enough past 90 min? The afternoon 15 km exposes how you function post-night-loop — the most common DNF window in 24h races.'},
+{ph:2,phLbl:'Phase 2',phCls:'ph-develop',phDesc:'Development',
+n:8,dates:'Jul 20–26',focus:'Recovery week',kmCls:'km-gray',kmLbl:'~38 km',kmVal:38,
+days:[
+{id:'8-1',dow:0,lbl:'Mon',desc:'Easy walk or full rest. After the night simulation and back-to-back, this is genuine recovery — no running, no lifting. Eat well.',tags:['rest'],km:0,rest:true},
+{id:'8-2',dow:1,lbl:'Tue',desc:'Easy run 8 km.',tags:['easy'],km:8,nut:false},
+{id:'8-3',dow:2,lbl:'Wed',desc:'Strength A — reduced.',tags:['strength'],km:0,nut:false},
+{id:'8-4',dow:3,lbl:'Thu',desc:'Easy run 10 km flat.',tags:['easy'],km:10,nut:false},
+{id:'8-5',dow:4,lbl:'Fri',desc:'Strength B — kept light to match the recovery nature of this week.',tags:['strength'],km:0,nut:false},
+{id:'8-6',dow:5,lbl:'Sat',desc:'Rest day.',tags:['rest'],km:0,rest:true},
+{id:'8-7',dow:6,lbl:'Sun',desc:'Long run 20 km easy.',tags:['long'],km:20,nut:false},
+],note:'Let the night sim and big weeks absorb. Review your nutrition log — adjust anything that did not sit well in the dark.'},
+{ph:3,phLbl:'Phase 3',phCls:'ph-peak',phDesc:'Peak training',
+n:9,dates:'Jul 27–Aug 2',focus:'Peak volume — biggest back-to-back',kmCls:'km-amber',kmLbl:'~94 km',kmVal:94,
+days:[
+{id:'9-1',dow:0,lbl:'Mon',desc:'Easy run 10 km. Peak week — the biggest back-to-back of the plan is on Saturday and Sunday. Start the week fresh and controlled.',tags:['easy'],km:10,nut:false},
+{id:'9-2',dow:1,lbl:'Tue',desc:'Race-pace tempo — 14 km total: 2 km warm-up, 2×20 min at your target comfortable race pace (the effort you can sustain all day), 2 km cool-down. This is not threshold — it is long race effort.',tags:['tempo'],km:14,nut:true},
+{id:'9-3',dow:2,lbl:'Wed',desc:'Strength A (moderate — protect legs for the weekend).',tags:['strength'],km:0,nut:false},
+{id:'9-4',dow:3,lbl:'Thu',desc:'Easy run 10 km. Rest fully after — eat well all day.',tags:['easy'],km:10,nut:true},
+{id:'9-5',dow:4,lbl:'Fri',desc:'Strength B. Keep it brief — the biggest back-to-back of the plan starts tomorrow. Pack your race kit after, sleep early.',tags:['strength'],km:0,nut:false},
+{id:'9-6',dow:5,lbl:'Sat',desc:'Back-to-back day 1: 35 km — full race simulation. Eat every 40 min, walk all climbs, start late afternoon to run into the evening with headlamp.',tags:['back'],km:35,nut:true},
+{id:'9-7',dow:6,lbl:'Sun',desc:'Back-to-back day 2: 25 km easy — the key session of the entire plan. Running deep into fatigue is the point. Eat even when you do not feel like it.',tags:['back'],km:25,nut:true},
+],note:'Hardest weekend of the plan. Sunday will not feel good — that is correct. Completing it over pacing is the goal. Brief your support person on race-day roles this week.'},
+{ph:3,phLbl:'Phase 3',phCls:'ph-peak',phDesc:'Peak training',
+n:10,dates:'Aug 3–9',focus:'Night simulation #2 — pre-dawn',kmCls:'km-amber',kmLbl:'~82 km',kmVal:82,
+days:[
+{id:'10-1',dow:0,lbl:'Mon',desc:"Easy run 14 km. Recovery after the back-to-back — no strength today, let Sunday's work settle. Keep the pace truly easy.",tags:['easy'],km:14,nut:false},
+{id:'10-2',dow:1,lbl:'Tue',desc:'Easy run 16 km.',tags:['easy'],km:16,nut:false},
+{id:'10-3',dow:2,lbl:'Wed',desc:'Strength A.',tags:['strength'],km:0,nut:false},
+{id:'10-4',dow:3,lbl:'Thu',desc:'Intervals — 12 km total: 2 km warm-up, 8×400m at hard effort with 200m walk recovery, 2 km cool-down. Sharpening speed without accumulating fatigue before peak weekend.',tags:['intervals'],km:12,nut:false},
+{id:'10-5',dow:4,lbl:'Fri',desc:'Strength B. Keep it short — big night simulation starts early Saturday morning.',tags:['strength'],km:0,nut:false},
+{id:'10-6',dow:5,lbl:'Sat',desc:'NIGHT SIM #2: Wake 4:30AM. Small snack, run 18 km pre-dawn in full race kit. Bring thermos of warm broth or ramen — eat mid-run.',tags:['night'],km:18,nut:true},
+{id:'10-7',dow:6,lbl:'Sun',desc:'Back-to-back 22 km easy — full gear, real food at halfway. Simulate a loop return at your support station. Running on night-sim legs is the point.',tags:['back'],km:22,nut:true},
+],note:'Pre-dawn is the hardest psychological window of a 24h race regardless of start time. Warm savoury food in the dark is a skill. Practise it now.'},
+{ph:4,phLbl:'Phase 4',phCls:'ph-taper',phDesc:'Taper',
+n:11,dates:'Aug 10–16',focus:'Volume down, sharpness stays',kmCls:'km-red',kmLbl:'~45 km',kmVal:45,
+days:[
+{id:'11-1',dow:0,lbl:'Mon',desc:"Easy run 8 km. After Sunday's back-to-back, the body needs one clear day before any loading. Strength resumes Wednesday.",tags:['easy'],km:8,nut:false},
+{id:'11-2',dow:1,lbl:'Tue',desc:'Easy run 10 km.',tags:['easy'],km:10,nut:false},
+{id:'11-3',dow:2,lbl:'Wed',desc:'Strength A.',tags:['strength'],km:0,nut:false},
+{id:'11-4',dow:3,lbl:'Thu',desc:'Sharpener — 10 km total: 2 km warm-up, 3×5 min at threshold effort with 90 sec jog recovery, 2 km cool-down. Enough to stay sharp, not enough to dig a hole.',tags:['tempo'],km:10,nut:false},
+{id:'11-5',dow:4,lbl:'Fri',desc:'Strength B — light (2× per week from here: Wed + Fri). Drop to 60% effort, this is maintenance only.',tags:['strength'],km:0,nut:false},
+{id:'11-6',dow:5,lbl:'Sat',desc:'Rest day. Finalise race-day food list with your support person.',tags:['rest'],km:0,rest:true},
+{id:'11-7',dow:6,lbl:'Sun',desc:'Long run 25 km easy — last meaningful long run.',tags:['long'],km:25,nut:false},
+],note:'Finalise the race-day nutrition list and brief your support person on what warm food to have ready each loop return.'},
+{ph:4,phLbl:'Phase 4',phCls:'ph-taper',phDesc:'Taper',
+n:12,dates:'Aug 17–23',focus:'Sharp taper — freshen legs',kmCls:'km-red',kmLbl:'~35 km',kmVal:35,
+days:[
+{id:'12-1',dow:0,lbl:'Mon',desc:'Strength A — light maintenance only.',tags:['strength'],km:0,nut:false},
+{id:'12-2',dow:1,lbl:'Tue',desc:'Easy run 8 km.',tags:['easy'],km:8,nut:false},
+{id:'12-3',dow:2,lbl:'Wed',desc:'Rest or easy walk.',tags:['rest'],km:0,rest:true},
+{id:'12-4',dow:3,lbl:'Thu',desc:'Easy run 8 km.',tags:['easy'],km:8,nut:false},
+{id:'12-5',dow:4,lbl:'Fri',desc:'Strength B — light.',tags:['strength'],km:0,nut:false},
+{id:'12-6',dow:5,lbl:'Sat',desc:'Rest day. Full support person briefing — kit, food, what "pull me out" vs "bad patch" looks like for you.',tags:['rest'],km:0,rest:true},
+{id:'12-7',dow:6,lbl:'Sun',desc:'Long run 18 km easy — last big run. Enjoy it.',tags:['long'],km:18,nut:false},
+],note:'Taper madness is real — feeling sluggish or anxious is expected. Fitness is locked in. Trust the process.'},
+{ph:4,phLbl:'Phase 4',phCls:'ph-taper',phDesc:'Taper',
+n:13,dates:'Aug 25–Sep 4',focus:'Race week — conserve everything',kmCls:'km-gray',kmLbl:'~15 km + Race',kmVal:0,
+days:[
+{id:'13-1',dow:0,lbl:'Mon Aug 25',desc:'Easy run 5 km just to move.',tags:['easy'],km:5,nut:false},
+{id:'13-2',dow:1,lbl:'Tue Aug 26',desc:'Rest. Finalise kit checklist.',tags:['rest'],km:0,rest:true},
+{id:'13-3',dow:2,lbl:'Wed Aug 27',desc:'Easy run 5 km with 4 strides. Nothing more.',tags:['easy'],km:5,nut:false},
+{id:'13-4',dow:3,lbl:'Thu Aug 28',desc:'Rest. Sleep well, hydrate, eat normally.',tags:['rest'],km:0,rest:true},
+{id:'13-5',dow:4,lbl:'Fri Aug 29',desc:'Shake-out run 5 km — that is it.',tags:['easy'],km:5,nut:false},
+{id:'13-6',dow:5,lbl:'Sat Aug 30–Wed Sep 3',desc:'Complete rest, travel, logistics, sleep.',tags:['rest'],km:0,rest:true},
+{id:'13-7',dow:6,lbl:'Thu Sep 4',desc:'MOSSARUN 24H. Start conservatively. First 6 hrs feel embarrassingly easy. Walk all climbs from loop 1. Eat real food every loop return. Your support person is your anchor.',tags:['race'],km:0,nut:true},
+],note:'Race: plan for a low point at 3–4AM regardless of start time. Warm savoury food + dry socks every loop. Start time is a surprise — be ready at any hour.'},
+];
+
+// ── STATE HELPERS ──────────────────────────────────────────────────────────
+const ds = id => S[id] || 'none';
+
+function cycle(id) { const c=ds(id); S[id]=c==='none'?'done':c==='done'?'missed':'none'; save(); render(); }
+function markMissed(id) { S[id]=ds(id)==='missed'?'none':'missed'; save(); render(); }
+
+window.cycle = cycle;
+window.markMissed = markMissed;
+
+// ── REORDER ────────────────────────────────────────────────────────────────
+function getOrder(week) {
+  const o = S['order_'+week.n];
+  if (o && o.length === week.days.length) return o;
+  return week.days.map((_,i) => i);
+}
+function saveOrder(week, order) { S['order_'+week.n] = order; save(); }
+function getOrderedDays(week) { return getOrder(week).map(i => week.days[i]); }
+
+// ── CONFLICT DETECTION ─────────────────────────────────────────────────────
+function hasStrength(day) { return day.tags.includes('strength'); }
+function getConflicts(week) {
+  const days = getOrderedDays(week);
+  const conflicts = new Set();
+  for (let i = 0; i < days.length-1; i++) {
+    if (hasStrength(days[i]) && hasStrength(days[i+1])) {
+      conflicts.add(days[i].id); conflicts.add(days[i+1].id);
     }
   }
   return conflicts;
 }
 
 // ── CURRENT POSITION ───────────────────────────────────────────────────────
-function getPos(){
-  const now=new Date();now.setHours(0,0,0,0);
-  const start=new Date(PLAN_START);start.setHours(0,0,0,0);
-  const diff=Math.floor((now-start)/86400000);
-  if(diff<0||diff>=91)return null;
-  return{wi:Math.floor(diff/7),dow:diff%7};
+function getPos() {
+  const now = new Date(); now.setHours(0,0,0,0);
+  const start = new Date(PLAN_START); start.setHours(0,0,0,0);
+  const diff = Math.floor((now - start) / 86400000);
+  if (diff < 0 || diff >= 91) return null;
+  return { wi: Math.floor(diff/7), dow: diff%7 };
 }
 
 // ── ADJUSTMENTS ────────────────────────────────────────────────────────────
-function getAdj(week){
-  const notes=[];
-  const missed=week.days.filter(d=>ds(d.id)==='missed');
-  const ms=missed.filter(d=>d.tags.includes('strength')).length;
-  const mr=missed.filter(d=>d.km>0&&!d.tags.includes('strength')&&!d.rest);
-  const mk=missed.reduce((a,d)=>a+d.km,0);
-  if(ms>=2)notes.push('Missed 2+ strength sessions — add 10 min bodyweight (squats, lunges, calf raises) to the end of your next 2 easy runs.');
-  else if(ms===1)notes.push('Missed 1 strength session — not critical. Resume next week as normal.');
-  mr.forEach(d=>{
-    if(d.tags.includes('long')||d.tags.includes('back')){
-      if(d.km>=25)notes.push(`Missed ${d.lbl} (${d.km} km) — shift to next free day if possible, or add 5 km to next week's long run.`);
+function getAdj(week) {
+  const notes = [];
+  const missed = week.days.filter(d => ds(d.id) === 'missed');
+  const ms = missed.filter(d => d.tags.includes('strength')).length;
+  const mr = missed.filter(d => d.km > 0 && !d.tags.includes('strength') && !d.rest);
+  const mk = missed.reduce((a,d) => a+d.km, 0);
+  if (ms >= 2) notes.push('Missed 2+ strength sessions — add 10 min bodyweight (squats, lunges, calf raises) to the end of your next 2 easy runs.');
+  else if (ms === 1) notes.push('Missed 1 strength session — not critical. Resume next week as normal.');
+  mr.forEach(d => {
+    if (d.tags.includes('long') || d.tags.includes('back')) {
+      if (d.km >= 25) notes.push(`Missed ${d.lbl} (${d.km} km) — shift to next free day if possible, or add 5 km to next week's long run.`);
       else notes.push(`Missed ${d.lbl} (${d.km} km) — add an easy 8 km on your next rest day if energy allows.`);
-    }else if(d.tags.includes('easy')){
+    } else if (d.tags.includes('easy')) {
       notes.push(`Missed ${d.lbl} easy run — skip it. Do not double up. Protect the Sunday long run.`);
-    }else if(d.tags.includes('tempo')||d.tags.includes('intervals')){
+    } else if (d.tags.includes('tempo') || d.tags.includes('intervals')) {
       notes.push(`Missed ${d.lbl} quality session — reschedule within 2 days if possible. If not, drop it and protect Sunday. Never sacrifice the long run for a quality session.`);
-    }else if(d.tags.includes('night')){
+    } else if (d.tags.includes('night')) {
       notes.push(`Missed ${d.lbl} night simulation — this one matters. Try to fit it in later this week, even a shortened version (10 km at 2–3AM). The experience is the point.`);
-    }else if(d.tags.includes('incline')){
+    } else if (d.tags.includes('incline')) {
       notes.push(`Missed ${d.lbl} incline session — squeeze in 20 min of stair climbing another day if possible.`);
     }
   });
-  if(mk>=20&&week.n<11)notes.push(`~${mk} km missed this week. Consider a gentler step-up next week rather than hitting the plan as written.`);
+  if (mk >= 20 && week.n < 11) notes.push(`~${mk} km missed this week. Consider a gentler step-up next week rather than hitting the plan as written.`);
   return notes;
 }
 
 // ── STATS ──────────────────────────────────────────────────────────────────
-function getStats(){
-  let km=0,done=0,missed=0;
-  weeks.forEach(w=>w.days.forEach(d=>{const s=ds(d.id);if(s==='done'){km+=d.km;done++;}if(s==='missed')missed++;}));
-  return{km,done,missed};
+function getStats() {
+  let km=0, done=0, missed=0;
+  weeks.forEach(w => w.days.forEach(d => {
+    const s = ds(d.id);
+    if (s === 'done') { km += d.km; done++; }
+    if (s === 'missed') missed++;
+  }));
+  return { km, done, missed };
 }
 
 // ── TAG HTML ───────────────────────────────────────────────────────────────
-function tg(t){return`<span class="tag tag-${t}">${TL[t]||t}</span>`;}
+function tg(t) { return `<span class="tag tag-${t}">${TL[t]||t}</span>`; }
 
 // ── HERO ───────────────────────────────────────────────────────────────────
-function renderHero(){
-  const hero=document.getElementById('hero');
-  const pos=getPos();
-  const now=new Date();
-  const dateStr=now.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'short'}).toUpperCase();
-
-  if(!pos){
-    const before=new Date()<PLAN_START;
-    hero.innerHTML=`<div class="hero-top"><div class="hero-eyebrow">${before?'Plan starts Jun 1 2025':'Race completed'}</div><div class="hero-date">${dateStr}</div></div>`;
+function renderHero() {
+  const hero = document.getElementById('hero');
+  const pos = getPos();
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'short'}).toUpperCase();
+  if (!pos) {
+    const before = new Date() < PLAN_START;
+    hero.innerHTML = `<div class="hero-top"><div class="hero-eyebrow">${before?'Plan starts Jun 1 2025':'Race completed'}</div><div class="hero-date">${dateStr}</div></div>`;
     return;
   }
-  const week=weeks[pos.wi];
-  const orderedDaysHero=week?getOrderedDays(week):[];
-  const day=orderedDaysHero[pos.dow]||null;
-  if(!day){
-    hero.innerHTML=`<div class="hero-top"><div class="hero-eyebrow">Today</div><div class="hero-date">${dateStr}</div></div><div class="hero-no-workout">No workout today.</div>`;
+  const week = weeks[pos.wi];
+  const orderedDaysHero = week ? getOrderedDays(week) : [];
+  const day = orderedDaysHero[pos.dow] || null;
+  if (!day) {
+    hero.innerHTML = `<div class="hero-top"><div class="hero-eyebrow">Today</div><div class="hero-date">${dateStr}</div></div><div class="hero-no-workout">No workout today.</div>`;
     return;
   }
-  const s=ds(day.id);
-  const isDone=s==='done',isMissed=s==='missed',isRest=day.rest||day.tags.includes('rest');
-  const btnCls=isDone?'btn-done is-done':isMissed?'btn-done is-missed':'btn-done';
-  const btnTxt=isDone?'✓  Done':isMissed?'✕  Missed':'Mark done';
-  const vTags=day.tags.filter(t=>t!=='rest');
-  const heroLbl=posLabel(week,pos.dow,day);
-
-  hero.innerHTML=`
+  const s = ds(day.id);
+  const isDone = s==='done', isMissed = s==='missed', isRest = day.rest || day.tags.includes('rest');
+  const btnCls = isDone?'btn-done is-done':isMissed?'btn-done is-missed':'btn-done';
+  const btnTxt = isDone?'✓ Done':isMissed?'✕ Missed':'Mark done';
+  const vTags = day.tags.filter(t => t !== 'rest');
+  const heroLbl = posLabel(week, pos.dow, day);
+  hero.innerHTML = `
     <div class="hero-top">
       <div class="hero-eyebrow">Today's workout</div>
       <div class="hero-date">${dateStr}</div>
@@ -523,71 +536,68 @@ function renderHero(){
     </div>`;
 }
 
-// ── ACCORDION ─────────────────────────────────────────────────────────────
-function toggleWeek(n){
-  S['open_'+n]=!S['open_'+n];
+// ── ACCORDION ──────────────────────────────────────────────────────────────
+function toggleWeek(n) {
+  S['open_'+n] = !S['open_'+n];
   save();
-  // animate via grid-template-rows (CSS handles the transition)
-  const body=document.getElementById('wb_'+n);
-  const chevron=document.getElementById('ch_'+n);
-  if(body){
-    body.classList.toggle('open',!!S['open_'+n]);
-  }
-  if(chevron){
-    chevron.classList.toggle('open',!!S['open_'+n]);
-  }
-  // update chevron in header too
-  renderHero(); // refresh hero done state
-  updateStats();
-}
-
-function updateStats(){
-  const st=getStats();
-  document.getElementById('s-km').textContent=st.km;
-  document.getElementById('s-sessions').textContent=st.done;
-  document.getElementById('s-missed').textContent=st.missed;
-}
-
-// ── POSITIONAL DAY LABEL ──────────────────────────────────────────────────
-const DOW_NAMES=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-function posLabel(week,dayIdx,day){
-  // Week 13 has full date labels baked in — preserve them
-  if(week.n===13)return day.lbl;
-  return DOW_NAMES[dayIdx]||day.lbl;
-}
-
-// ── MAIN RENDER ────────────────────────────────────────────────────────────
-function render(){
+  const body = document.getElementById('wb_'+n);
+  const chevron = document.getElementById('ch_'+n);
+  if (body) body.classList.toggle('open', !!S['open_'+n]);
+  if (chevron) chevron.classList.toggle('open', !!S['open_'+n]);
   renderHero();
   updateStats();
+}
+window.toggleWeek = toggleWeek;
 
-  const pos=getPos();
-  const con=document.getElementById('plan');
-  let html='',lastPh=0;
+function updateStats() {
+  const st = getStats();
+  document.getElementById('s-km').textContent = st.km;
+  document.getElementById('s-sessions').textContent = st.done;
+  document.getElementById('s-missed').textContent = st.missed;
+}
 
-  weeks.forEach((week,wi)=>{
-    if(week.ph!==lastPh){
-      lastPh=week.ph;
-      html+=`<div class="phase-row ${week.phCls}">
+// ── POSITIONAL DAY LABEL ───────────────────────────────────────────────────
+const DOW_NAMES = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+function posLabel(week, dayIdx, day) {
+  if (week.n === 13) return day.lbl;
+  return DOW_NAMES[dayIdx] || day.lbl;
+}
+
+// ── REORDER TOGGLE ─────────────────────────────────────────────────────────
+function toggleReorder(n) { S['reorder_'+n] = !S['reorder_'+n]; save(); render(); }
+window.toggleReorder = toggleReorder;
+
+// ── MAIN RENDER ────────────────────────────────────────────────────────────
+function render() {
+  renderHero();
+  updateStats();
+  const pos = getPos();
+  const con = document.getElementById('plan');
+  let html = '', lastPh = 0;
+
+  weeks.forEach((week, wi) => {
+    if (week.ph !== lastPh) {
+      lastPh = week.ph;
+      html += `<div class="phase-row ${week.phCls}">
         <div class="phase-pill">${week.phLbl}</div>
         <div class="phase-line"></div>
         <div class="phase-name">${week.phDesc}</div>
       </div>`;
     }
-    const adj=getAdj(week);
-    const hasAdj=adj.length>0;
-    const isCurrent=pos&&pos.wi===wi;
-    const nonRest=week.days.filter(d=>!d.rest).length;
-    const doneCnt=week.days.filter(d=>ds(d.id)==='done').length;
-    const prog=nonRest>0?Math.round((doneCnt/nonRest)*100):0;
-    const isComplete=doneCnt===nonRest&&nonRest>0;
-    const isOpen=(S['open_'+week.n]===undefined&&isCurrent)||!!S['open_'+week.n];
-    const conflicts=getConflicts(week);
-    const hasConflict=conflicts.size>0;
-    const isReordering=!!S['reorder_'+week.n];
-    const orderedDays=getOrderedDays(week);
+    const adj = getAdj(week);
+    const hasAdj = adj.length > 0;
+    const isCurrent = pos && pos.wi === wi;
+    const nonRest = week.days.filter(d => !d.rest).length;
+    const doneCnt = week.days.filter(d => ds(d.id) === 'done').length;
+    const prog = nonRest > 0 ? Math.round((doneCnt/nonRest)*100) : 0;
+    const isComplete = doneCnt === nonRest && nonRest > 0;
+    const isOpen = (S['open_'+week.n] === undefined && isCurrent) || !!S['open_'+week.n];
+    const conflicts = getConflicts(week);
+    const hasConflict = conflicts.size > 0;
+    const isReordering = !!S['reorder_'+week.n];
+    const orderedDays = getOrderedDays(week);
 
-    html+=`<div class="week-card${isCurrent?' is-current':''}${hasAdj?' has-adj':''}${hasConflict?' has-conflict':''}">
+    html += `<div class="week-card${isCurrent?' is-current':''}${hasAdj?' has-adj':''}${hasConflict?' has-conflict':''}">
       <div class="week-hdr" onclick="toggleWeek(${week.n})">
         <div class="week-num-col">
           <div class="week-num">W${week.n}</div>
@@ -606,19 +616,20 @@ function render(){
       </div>
       <div class="week-body${isOpen?' open':''}" id="wb_${week.n}">
         <div class="week-body-inner${isReordering?' reorder-mode':''}" id="wbi_${week.n}">
-        <button class="reorder-btn${isReordering?' active':''}" onclick="event.stopPropagation();toggleReorder(${week.n})">${isReordering?'✓ Done reordering':'⇅ Reorder sessions'}</button>`;
+          <button class="reorder-btn${isReordering?' active':''}" onclick="event.stopPropagation();toggleReorder(${week.n})">${isReordering?'✓ Done reordering':'⇅ Reorder sessions'}</button>`;
 
-    orderedDays.forEach((day,dayIdx)=>{
-      const s=ds(day.id);
-      const isToday=pos&&pos.wi===wi&&pos.dow===dayIdx;
-      const isConflict=conflicts.has(day.id);
-      const rowCls=[isToday?'is-today':'',s==='done'?'is-done':'',s==='missed'?'is-missed':'',day.rest?'is-rest':''].filter(Boolean).join(' ');
-      const checkCls=s==='done'?'done':s==='missed'?'missed':'';
-      const checkChar=s==='done'?'✓':s==='missed'?'✕':'';
-      const vTags=day.tags.filter(t=>t!=='rest');
-      const tagsHtml=vTags.map(t=>tg(t)).join('')+(day.nut?tg('nutrition'):'');
-      const displayLbl=posLabel(week,dayIdx,day);
-      html+=`<div class="day-row ${rowCls}" data-week="${week.n}" data-idx="${dayIdx}" draggable="${isReordering?'true':'false'}">
+    orderedDays.forEach((day, dayIdx) => {
+      const s = ds(day.id);
+      const isToday = pos && pos.wi === wi && pos.dow === dayIdx;
+      const isConflict = conflicts.has(day.id);
+      const rowCls = [isToday?'is-today':'', s==='done'?'is-done':'', s==='missed'?'is-missed':'', day.rest?'is-rest':''].filter(Boolean).join(' ');
+      const checkCls = s==='done'?'done':s==='missed'?'missed':'';
+      const checkChar = s==='done'?'✓':s==='missed'?'✕':'';
+      const vTags = day.tags.filter(t => t !== 'rest');
+      const tagsHtml = vTags.map(t=>tg(t)).join('') + (day.nut?tg('nutrition'):'');
+      const displayLbl = posLabel(week, dayIdx, day);
+
+      html += `<div class="day-row ${rowCls}" data-week="${week.n}" data-idx="${dayIdx}" draggable="${isReordering?'true':'false'}">
         ${isReordering?`<div class="drag-handle" title="Drag to reorder">⠿</div>`:''}
         <div class="day-check ${checkCls}" onclick="cycle('${day.id}')">${checkChar}</div>
         <div class="day-main">
@@ -630,107 +641,97 @@ function render(){
       </div>`;
     });
 
-    if(week.note)html+=`<div class="week-note">${week.note}</div>`;
-    adj.forEach(a=>html+=`<div class="adj-note"><strong>Adjustment:</strong> ${a}</div>`);
-    html+=`</div></div></div>`;
+    if (week.note) html += `<div class="week-note">${week.note}</div>`;
+    adj.forEach(a => html += `<div class="adj-note"><strong>Adjustment:</strong> ${a}</div>`);
+    html += `</div></div></div>`;
   });
 
-  con.innerHTML=html;
+  con.innerHTML = html;
   initDrag();
 }
 
-// ── REORDER TOGGLE ─────────────────────────────────────────────────────────
-function toggleReorder(n){
-  S['reorder_'+n]=!S['reorder_'+n];
-  save();
-  render();
-}
-
 // ── DRAG AND DROP ──────────────────────────────────────────────────────────
-function initDrag(){
-  let dragSrcWeek=null,dragSrcIdx=null,dragEl=null;
+function initDrag() {
+  let dragSrcWeek=null, dragSrcIdx=null, dragEl=null;
 
-  document.querySelectorAll('.day-row[draggable="true"]').forEach(row=>{
-    // ── Mouse drag ──
-    row.addEventListener('dragstart',e=>{
-      dragSrcWeek=+row.dataset.week;
-      dragSrcIdx=+row.dataset.idx;
-      dragEl=row;
-      setTimeout(()=>row.classList.add('dragging'),0);
-      e.dataTransfer.effectAllowed='move';
+  document.querySelectorAll('.day-row[draggable="true"]').forEach(row => {
+    row.addEventListener('dragstart', e => {
+      dragSrcWeek = +row.dataset.week;
+      dragSrcIdx = +row.dataset.idx;
+      dragEl = row;
+      setTimeout(() => row.classList.add('dragging'), 0);
+      e.dataTransfer.effectAllowed = 'move';
     });
-    row.addEventListener('dragend',()=>{
+    row.addEventListener('dragend', () => {
       row.classList.remove('dragging');
-      document.querySelectorAll('.day-row').forEach(r=>r.classList.remove('drag-over'));
+      document.querySelectorAll('.day-row').forEach(r => r.classList.remove('drag-over'));
     });
-    row.addEventListener('dragover',e=>{
+    row.addEventListener('dragover', e => {
       e.preventDefault();
-      e.dataTransfer.dropEffect='move';
-      document.querySelectorAll('.day-row').forEach(r=>r.classList.remove('drag-over'));
-      if(row!==dragEl)row.classList.add('drag-over');
+      e.dataTransfer.dropEffect = 'move';
+      document.querySelectorAll('.day-row').forEach(r => r.classList.remove('drag-over'));
+      if (row !== dragEl) row.classList.add('drag-over');
     });
-    row.addEventListener('drop',e=>{
+    row.addEventListener('drop', e => {
       e.preventDefault();
-      const targetIdx=+row.dataset.idx;
-      const targetWeek=+row.dataset.week;
-      if(dragSrcWeek!==targetWeek||dragSrcIdx===targetIdx)return;
-      const week=weeks.find(w=>w.n===dragSrcWeek);
-      if(!week)return;
-      const order=getOrder(week);
-      const newOrder=[...order];
-      const [moved]=newOrder.splice(dragSrcIdx,1);
-      newOrder.splice(targetIdx,0,moved);
-      saveOrder(week,newOrder);
+      const targetIdx = +row.dataset.idx;
+      const targetWeek = +row.dataset.week;
+      if (dragSrcWeek !== targetWeek || dragSrcIdx === targetIdx) return;
+      const week = weeks.find(w => w.n === dragSrcWeek);
+      if (!week) return;
+      const order = getOrder(week);
+      const newOrder = [...order];
+      const [moved] = newOrder.splice(dragSrcIdx, 1);
+      newOrder.splice(targetIdx, 0, moved);
+      saveOrder(week, newOrder);
       render();
     });
 
-    // ── Touch drag ──
-    let touchStartY=0,touchStartIdx=null,touchWeek=null;
-    row.addEventListener('touchstart',e=>{
-      if(!row.closest('.reorder-mode'))return;
-      touchStartY=e.touches[0].clientY;
-      touchStartIdx=+row.dataset.idx;
-      touchWeek=+row.dataset.week;
+    // Touch drag
+    let touchStartY=0, touchStartIdx=null, touchWeek=null;
+    row.addEventListener('touchstart', e => {
+      if (!row.closest('.reorder-mode')) return;
+      touchStartY = e.touches[0].clientY;
+      touchStartIdx = +row.dataset.idx;
+      touchWeek = +row.dataset.week;
       row.classList.add('dragging');
-    },{passive:true});
-    row.addEventListener('touchmove',e=>{
-      if(touchStartIdx===null)return;
+    }, {passive:true});
+    row.addEventListener('touchmove', e => {
+      if (touchStartIdx === null) return;
       e.preventDefault();
-      const y=e.touches[0].clientY;
-      const els=document.querySelectorAll(`[data-week="${touchWeek}"]`);
-      let closest=null,closestDist=Infinity;
-      els.forEach(el=>{
-        const rect=el.getBoundingClientRect();
-        const mid=rect.top+rect.height/2;
-        const dist=Math.abs(y-mid);
-        if(dist<closestDist&&+el.dataset.idx!==touchStartIdx){closestDist=dist;closest=el;}
+      const y = e.touches[0].clientY;
+      const els = document.querySelectorAll(`[data-week="${touchWeek}"]`);
+      let closest=null, closestDist=Infinity;
+      els.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const mid = rect.top + rect.height/2;
+        const dist = Math.abs(y - mid);
+        if (dist < closestDist && +el.dataset.idx !== touchStartIdx) { closestDist=dist; closest=el; }
       });
-      document.querySelectorAll('.day-row').forEach(r=>r.classList.remove('drag-over'));
-      if(closest)closest.classList.add('drag-over');
-    },{passive:false});
-    row.addEventListener('touchend',e=>{
-      if(touchStartIdx===null)return;
+      document.querySelectorAll('.day-row').forEach(r => r.classList.remove('drag-over'));
+      if (closest) closest.classList.add('drag-over');
+    }, {passive:false});
+    row.addEventListener('touchend', e => {
+      if (touchStartIdx === null) return;
       row.classList.remove('dragging');
-      const overEl=document.querySelector('.day-row.drag-over');
-      if(overEl&&+overEl.dataset.week===touchWeek){
-        const targetIdx=+overEl.dataset.idx;
-        const week=weeks.find(w=>w.n===touchWeek);
-        if(week){
-          const order=getOrder(week);
-          const newOrder=[...order];
-          const [moved]=newOrder.splice(touchStartIdx,1);
-          newOrder.splice(targetIdx,0,moved);
-          saveOrder(week,newOrder);
+      const overEl = document.querySelector('.day-row.drag-over');
+      if (overEl && +overEl.dataset.week === touchWeek) {
+        const targetIdx = +overEl.dataset.idx;
+        const week = weeks.find(w => w.n === touchWeek);
+        if (week) {
+          const order = getOrder(week);
+          const newOrder = [...order];
+          const [moved] = newOrder.splice(touchStartIdx, 1);
+          newOrder.splice(targetIdx, 0, moved);
+          saveOrder(week, newOrder);
         }
       }
-      touchStartIdx=null;
-      document.querySelectorAll('.day-row').forEach(r=>r.classList.remove('drag-over'));
+      touchStartIdx = null;
+      document.querySelectorAll('.day-row').forEach(r => r.classList.remove('drag-over'));
       render();
     });
   });
 }
-
-render();
 </script>
 </body>
 </html>
