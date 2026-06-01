@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Mossarun 24h</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&family=Inconsolata:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -12,10 +13,6 @@
 :root{
   /* ── Base palette ── */
   --bg:       #07201a;
-  --bg2:      #0c2a22;
-  --bg3:      #11342a;
-  --card:     #0f2e25;
-  --card2:    #142f27;
   --border:   rgba(120,200,160,0.13);
   --border2:  rgba(120,200,160,0.22);
 
@@ -28,7 +25,6 @@
   /* ── Amber accent ── */
   --amber:    #c8903a;
   --amber2:   #b07a28;
-  --amber-lt: #e0a84a;
   --amber-txt:#dfa040;
 
   /* ── Category colours — solid opaque backgrounds, vivid fg, max differentiation ── */
@@ -56,14 +52,11 @@
   --c-rest-bg:   #243028; --c-rest-fg:  #88a898;
 
   --r:10px; --r2:14px;
-  --shadow: 0 4px 24px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.3);
-  --shadow-lg: 0 8px 40px rgba(0,0,0,0.55), 0 2px 8px rgba(0,0,0,0.35);
   --display:'Barlow Condensed',sans-serif;
   --body:'Barlow',sans-serif;
   --mono:'Inconsolata',monospace;
 }
 
-/* ── DOT GRID BACKGROUND ─────────────────────────────── */
 html{-webkit-text-size-adjust:100%;background:var(--bg);}
 body{
   font-family:var(--body);
@@ -77,19 +70,49 @@ body{
     radial-gradient(circle at 80% 100%, rgba(30,100,70,0.06) 0%, transparent 50%),
     radial-gradient(rgba(100,180,130,0.18) 1px, transparent 1px);
   background-size:auto, auto, 22px 22px;
-  background-attachment: fixed, fixed, fixed;
+  touch-action: pan-y;
 }
 
-/* ── HERO ─────────────────────────────────────────────── */
-.hero{
-  background: rgba(10,30,24,0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom:1px solid var(--border2);
-  position:sticky;top:0;z-index:100;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.5);
+/* ── HERO CARD ────────────────────────────────────────── */
+.hero-wrapper{position:relative;margin-top:20px;margin-bottom:20px;margin-left:-12px;margin-right:-12px;}
+.hero-wrapper::before,
+.hero-wrapper::after{
+  content:'';
+  position:absolute;left:0;right:0;
+  height:1px;
+  background:rgba(120,200,160,0.35);
 }
-.hero-top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 8px;}
+.hero-wrapper::before{top:0;}
+.hero-wrapper::after{bottom:0;}
+.hero{
+  background: rgba(8,26,20,0.95);
+  border:none;
+  border-radius:0;
+  overflow:hidden;
+  box-shadow:none;
+  padding:4px 0;
+}
+.hero.has-workout{
+  border-top:2px solid rgba(200,144,58,0.65);
+}
+.hero-top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 6px;}
+.hero-top-left{display:flex;align-items:center;gap:8px;}
+.hero-pulse{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--amber);flex-shrink:0;
+  position:relative;
+}
+.hero-pulse::after{
+  content:'';position:absolute;inset:-4px;border-radius:50%;
+  border:1.5px solid rgba(200,144,58,0.5);
+  animation: pulse-ring 2s ease-out infinite;
+  will-change: transform, opacity;
+}
+@keyframes pulse-ring{
+  0%  {transform:scale(0.6);opacity:1;}
+  70% {transform:scale(1.8);opacity:0;}
+  100%{transform:scale(1.8);opacity:0;}
+}
 .hero-eyebrow{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber-txt);}
 .hero-date{font-family:var(--mono);font-size:11px;color:var(--dim);}
 .hero-body{padding:0 16px 16px;}
@@ -104,11 +127,10 @@ body{
   font-family:var(--display);font-size:20px;font-weight:800;
   letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;
   transition:background 0.12s,transform 0.08s;
-  box-shadow: 0 4px 16px rgba(200,144,58,0.35);
 }
 .btn-done:active{background:var(--amber2);transform:scale(0.97);}
-.btn-done.is-done{background:rgba(255,255,255,0.08);color:var(--cream);box-shadow:none;border:1px solid var(--border2);}
-.btn-done.is-missed{background:transparent;color:var(--amber-txt);border:1.5px solid var(--amber);box-shadow:none;}
+.btn-done.is-done{background:rgba(255,255,255,0.08);color:var(--cream);border:1px solid var(--border2);}
+.btn-done.is-missed{background:transparent;color:var(--amber-txt);border:1.5px solid var(--amber);}
 .btn-skip{background:rgba(255,255,255,0.06);color:var(--cream3);border:1.5px solid var(--border2);border-radius:var(--r);padding:14px 14px;font-family:var(--display);font-size:20px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;}
 .btn-skip:active{opacity:0.7;}
 .hero-no-workout{padding:0 16px 14px;font-family:var(--mono);font-size:14px;color:var(--dim);}
@@ -116,9 +138,8 @@ body{
 /* ── STATS BAR ───────────────────────────────────────── */
 .stats-bar{
   display:grid;grid-template-columns:repeat(3,1fr);
-  background:rgba(8,26,20,0.85);
+  background:rgba(8,26,20,0.95);
   border-bottom:1px solid var(--border);
-  backdrop-filter:blur(8px);
 }
 .stat-cell{padding:12px;text-align:center;border-right:1px solid var(--border);}
 .stat-cell:last-child{border-right:none;}
@@ -148,17 +169,15 @@ body{
 
 /* ── WEEK CARD ─────────────────────────────────────────── */
 .week-card{
-  background: rgba(14,42,34,0.75);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(14,42,34,0.92);
   border:1px solid var(--border);
   border-radius:var(--r2);
   margin-bottom:10px;
   overflow:hidden;
-  box-shadow: var(--shadow);
-  transition: box-shadow 0.2s, border-color 0.2s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.55);
+  transition: border-color 0.2s;
 }
-.week-card.is-current{border-color:rgba(200,144,58,0.55);box-shadow:var(--shadow-lg),0 0 0 1px rgba(200,144,58,0.2);}
+.week-card.is-current{border-color:rgba(200,144,58,0.6);}
 .week-card.has-adj{border-color:rgba(160,180,160,0.3);}
 .week-card.has-conflict{border-color:rgba(200,144,58,0.4);}
 .week-hdr{display:flex;align-items:center;gap:10px;padding:14px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;}
@@ -215,7 +234,7 @@ body{
 .day-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
 
 /* ── TAGS — distinct per category ──────────────────────── */
-.tag{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 8px;border-radius:4px;}
+.tag{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 8px;border-radius:4px;display:inline-flex;align-items:center;}
 .tag-easy      {background:var(--c-easy-bg);  color:var(--c-easy-fg);}
 .tag-long      {background:var(--c-long-bg);  color:var(--c-long-fg);}
 .tag-strength  {background:var(--c-str-bg);   color:var(--c-str-fg);}
@@ -262,13 +281,10 @@ body{
 .reorder-btn.active{background:rgba(200,144,58,0.1);color:var(--amber-txt);border-color:rgba(200,144,58,0.4);}
 
 /* ── CONFLICT ────────────────────────────────────────────── */
-.conflict-badge{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:rgba(200,144,58,0.1);color:var(--amber-txt);border:1px solid rgba(200,144,58,0.3);white-space:nowrap;}
 .day-conflict-warn{font-family:var(--mono);font-size:11px;color:var(--amber-txt);margin-top:5px;display:flex;align-items:center;gap:4px;}
 </style>
 </head>
 <body>
-
-<div class="hero" id="hero"></div>
 
 <div class="stats-bar">
   <div class="stat-cell"><div class="stat-val" id="s-km">0</div><div class="stat-lbl">km done</div></div>
@@ -294,12 +310,15 @@ body{
     <span class="leg-item"><span class="leg-dot" style="background:var(--c-race-bg)"></span>Race</span>
   </div>
 
+  <div class="hero-wrapper">
+    <div id="hero" class="hero"></div>
+  </div>
   <div id="plan"></div>
 </div>
 
 <script>
 const STORAGE='mossarun_v6';
-const PLAN_START=new Date(2025,5,1);
+const PLAN_START=new Date(2026,5,1);
 const TL={easy:'Easy run',long:'Long run',strength:'Strength',tempo:'Tempo',
   rest:'Rest',back:'Back-to-back',race:'Race day',night:'Night sim',
   incline:'Incline',nutrition:'Nutrition',intervals:'Intervals'};
@@ -450,15 +469,25 @@ days:[
 ],note:'Taper madness is real — feeling sluggish or anxious is expected. Fitness is locked in. Trust the process.'},
 
 {ph:4,phLbl:'Phase 4',phCls:'ph-taper',phDesc:'Taper',
-n:13,dates:'Aug 25–Sep 4',focus:'Race week — conserve everything',kmCls:'km-gray',kmLbl:'~15 km + Race',kmVal:0,
+n:13,dates:'Aug 24–30',focus:'Final taper — arrive fresh',kmCls:'km-gray',kmLbl:'~15 km',kmVal:15,
 days:[
-{id:'13-1',dow:0,lbl:'Mon Aug 25',desc:'Easy run 5 km just to move.',tags:['easy'],km:5,nut:false},
-{id:'13-2',dow:1,lbl:'Tue Aug 26',desc:'Rest. Finalise kit checklist.',tags:['rest'],km:0,rest:true},
-{id:'13-3',dow:2,lbl:'Wed Aug 27',desc:'Easy run 5 km with 4 strides. Nothing more.',tags:['easy'],km:5,nut:false},
-{id:'13-4',dow:3,lbl:'Thu Aug 28',desc:'Rest. Sleep well, hydrate, eat normally.',tags:['rest'],km:0,rest:true},
-{id:'13-5',dow:4,lbl:'Fri Aug 29',desc:'Shake-out run 5 km — that is it.',tags:['easy'],km:5,nut:false},
-{id:'13-6',dow:5,lbl:'Sat Aug 30–Wed Sep 3',desc:'Complete rest, travel, logistics, sleep.',tags:['rest'],km:0,rest:true},
-{id:'13-7',dow:6,lbl:'Thu Sep 4',desc:'MOSSARUN 24H. Start conservatively. First 6 hrs feel embarrassingly easy. Walk all climbs from loop 1. Eat real food every loop return. Your support person is your anchor.',tags:['race'],km:0,nut:true},
+{id:'13-1',dow:0,lbl:'Mon Aug 24',desc:'Easy run 5 km just to move.',tags:['easy'],km:5,nut:false},
+{id:'13-2',dow:1,lbl:'Tue Aug 25',desc:'Rest. Finalise kit checklist.',tags:['rest'],km:0,rest:true},
+{id:'13-3',dow:2,lbl:'Wed Aug 26',desc:'Easy run 5 km with 4 strides. Nothing more.',tags:['easy'],km:5,nut:false},
+{id:'13-4',dow:3,lbl:'Thu Aug 27',desc:'Rest. Sleep well, hydrate, eat normally.',tags:['rest'],km:0,rest:true},
+{id:'13-5',dow:4,lbl:'Fri Aug 28',desc:'Shake-out run 5 km — that is it.',tags:['easy'],km:5,nut:false},
+{id:'13-6',dow:5,lbl:'Sat Aug 29',desc:'Rest day. Full support person briefing — kit, food, what "pull me out" vs "bad patch" looks like for you.',tags:['rest'],km:0,rest:true},
+{id:'13-7',dow:6,lbl:'Sun Aug 30',desc:'Rest day. Pack your drop bags and race kit. Early night.',tags:['rest'],km:0,rest:true},
+],note:'Taper madness is real — feeling sluggish or anxious is expected. Fitness is locked in. Trust the process.'},
+
+{ph:4,phLbl:'Phase 4',phCls:'ph-taper',phDesc:'Taper',
+n:14,dates:'Aug 31–Sep 4',focus:'Race week — conserve everything',kmCls:'km-gray',kmLbl:'Race',kmVal:0,
+days:[
+{id:'14-1',dow:0,lbl:'Mon Aug 31',desc:'Complete rest. Travel, logistics, sleep.',tags:['rest'],km:0,rest:true},
+{id:'14-2',dow:1,lbl:'Tue Sep 1',desc:'Complete rest. Eat well, stay off your feet.',tags:['rest'],km:0,rest:true},
+{id:'14-3',dow:2,lbl:'Wed Sep 2',desc:'Complete rest. Hydrate, sleep early.',tags:['rest'],km:0,rest:true},
+{id:'14-4',dow:3,lbl:'Thu Sep 3',desc:'Complete rest. Final kit check, eat normally, be in bed early.',tags:['rest'],km:0,rest:true},
+{id:'14-5',dow:4,lbl:'Fri Sep 4',desc:'MOSSARUN 24H. Start conservatively. First 6 hrs feel embarrassingly easy. Walk all climbs from loop 1. Eat real food every loop return. Your support person is your anchor.',tags:['race'],km:0,nut:true},
 ],note:'Race: plan for a low point at 3–4AM regardless of start time. Warm savoury food + dry socks every loop. Start time is a surprise — be ready at any hour.'},
 ];
 
@@ -484,8 +513,12 @@ function getPos(){
   const now=new Date();now.setHours(0,0,0,0);
   const start=new Date(PLAN_START);start.setHours(0,0,0,0);
   const diff=Math.floor((now-start)/86400000);
-  if(diff<0||diff>=91)return null;
-  return{wi:Math.floor(diff/7),dow:diff%7};
+  if(diff<0||diff>=95)return null;
+  const wi=Math.floor(diff/7);
+  const dow=diff%7;
+  // W14 (wi=13) only has 5 days (Mon–Fri), cap dow at 4
+  if(wi===13&&dow>4)return null;
+  return{wi,dow};
 }
 
 function getAdj(week){
@@ -515,25 +548,41 @@ function renderHero(){
   const pos=getPos();
   const now=new Date();
   const dateStr=now.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'short'}).toUpperCase();
-  if(!pos){const before=new Date()<PLAN_START;hero.innerHTML=`<div class="hero-top"><div class="hero-eyebrow">${before?'Plan starts Jun 1 2025':'Race completed'}</div><div class="hero-date">${dateStr}</div></div>`;return;}
+  if(!pos){
+    hero.classList.remove('has-workout');
+    const before=new Date()<PLAN_START;
+    hero.innerHTML=`<div class="hero-top"><div class="hero-top-left"><div class="hero-eyebrow">${before?'Plan starts Jun 1 2026':'Race completed'}</div></div><div class="hero-date">${dateStr}</div></div>`;
+    return;
+  }
   const week=weeks[pos.wi];
   const orderedDaysHero=week?getOrderedDays(week):[];
   const day=orderedDaysHero[pos.dow]||null;
-  if(!day){hero.innerHTML=`<div class="hero-top"><div class="hero-eyebrow">Today</div><div class="hero-date">${dateStr}</div></div><div class="hero-no-workout">No workout today.</div>`;return;}
+  if(!day){
+    hero.classList.remove('has-workout');
+    hero.innerHTML=`<div class="hero-top"><div class="hero-top-left"><div class="hero-eyebrow">Today</div></div><div class="hero-date">${dateStr}</div></div><div class="hero-no-workout">No workout today.</div>`;
+    return;
+  }
   const s=ds(day.id);
   const isDone=s==='done',isMissed=s==='missed',isRest=day.rest||day.tags.includes('rest');
   const btnCls=isDone?'btn-done is-done':isMissed?'btn-done is-missed':'btn-done';
-  const btnTxt=isDone?'✓ Done':isMissed?'✕ Missed':'Mark done';
+  const btnTxt=isDone?'&#10003; Done':isMissed?'&#10005; Missed':'Mark done';
   const vTags=day.tags.filter(t=>t!=='rest');
-  const heroLbl=posLabel(week,pos.dow,day);
+  const heroLbl=posLabel(week,pos.dow);
+  hero.classList.add('has-workout');
   hero.innerHTML=`
-    <div class="hero-top"><div class="hero-eyebrow">Today's workout</div><div class="hero-date">${dateStr}</div></div>
+    <div class="hero-top">
+      <div class="hero-top-left">
+        <div class="hero-pulse"></div>
+        <div class="hero-eyebrow">Today's workout</div>
+      </div>
+      <div class="hero-date">${dateStr}</div>
+    </div>
     <div class="hero-body">
       <div class="hero-pill-row">
         <span class="hero-week-badge">W${week.n} · ${week.dates}</span>
         ${vTags.map(t=>tg(t)).join('')}${day.nut?tg('nutrition'):''}
       </div>
-      <div class="hero-title">${heroLbl} — ${vTags.map(t=>TL[t]||t).join(' + ')}</div>
+      <div class="hero-title">${heroLbl} &mdash; ${vTags.map(t=>TL[t]||t).join(' + ')}</div>
       <div class="hero-desc">${day.desc}</div>
       ${!isRest?`<div class="hero-actions">
         <button class="${btnCls}" onclick="cycle('${day.id}')">${btnTxt}</button>
@@ -554,7 +603,12 @@ function toggleWeek(n){
 function updateStats(){const st=getStats();document.getElementById('s-km').textContent=st.km;document.getElementById('s-sessions').textContent=st.done;document.getElementById('s-missed').textContent=st.missed;}
 
 const DOW_NAMES=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-function posLabel(week,dayIdx,day){if(week.n===13)return day.lbl;return DOW_NAMES[dayIdx]||day.lbl;}
+const MONTH_NAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function posLabel(week,dayIdx){
+  const d=new Date(PLAN_START);
+  d.setDate(d.getDate()+(week.n-1)*7+dayIdx);
+  return `${DOW_NAMES[dayIdx]} ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`;
+}
 
 function render(){
   renderHero();updateStats();
@@ -610,7 +664,7 @@ function render(){
       const checkChar=s==='done'?'✓':s==='missed'?'✕':'';
       const vTags=day.tags.filter(t=>t!=='rest');
       const tagsHtml=vTags.map(t=>tg(t)).join('')+(day.nut?tg('nutrition'):'');
-      const displayLbl=posLabel(week,dayIdx,day);
+      const displayLbl=posLabel(week,dayIdx);
       html+=`<div class="day-row ${rowCls}" data-week="${week.n}" data-idx="${dayIdx}" draggable="${isReordering?'true':'false'}">
         ${isReordering?`<div class="drag-handle" title="Drag to reorder">⠿</div>`:''}
         <div class="day-check ${checkCls}" onclick="cycle('${day.id}')">${checkChar}</div>
