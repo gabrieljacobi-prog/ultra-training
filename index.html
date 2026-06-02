@@ -291,6 +291,9 @@ body{
   <div class="stat-cell"><div class="stat-val" id="s-sessions">0</div><div class="stat-lbl">sessions</div></div>
   <div class="stat-cell"><div class="stat-val" id="s-missed">0</div><div class="stat-lbl">missed</div></div>
 </div>
+<div style="text-align:right;padding:4px 14px;font-family:var(--mono);font-size:11px;background:var(--ink2);border-bottom:1px solid rgba(138,184,160,0.08);">
+  <span id="sync-status" style="color:var(--dim);letter-spacing:0.06em;">Connecting…</span>
+</div>
 
 <div class="main">
   <div class="app-title">
@@ -316,8 +319,11 @@ body{
   <div id="plan"></div>
 </div>
 
-<script>
-const STORAGE='mossarun_v6';
+<script type="module">
+// ── FIREBASE SYNC ──────────────────────────────────────────────────────────
+import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import{getDatabase,ref,set,onValue}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+
 const PLAN_START=new Date(2026,5,1);
 const TL={easy:'Easy run',long:'Long run',strength:'Strength',tempo:'Tempo',
   rest:'Rest',back:'Back-to-back',race:'Race day',night:'Night sim',
@@ -491,12 +497,51 @@ days:[
 ],note:'Race: plan for a low point at 3–4AM regardless of start time. Warm savoury food + dry socks every loop. Start time is a surprise — be ready at any hour.'},
 ];
 
+// ── FIREBASE SYNC ──────────────────────────────────────────────────────────
+const firebaseConfig={
+  apiKey:'AIzaSyCgedRAgFylbufa4yJDlkSfWZWuDa1qPk8',
+  authDomain:'ultra-training-9d35b.firebaseapp.com',
+  databaseURL:'https://ultra-training-9d35b-default-rtdb.europe-west1.firebasedatabase.app',
+  projectId:'ultra-training-9d35b',
+  storageBucket:'ultra-training-9d35b.firebasestorage.app',
+  messagingSenderId:'915061613031',
+  appId:'1:915061613031:web:a822226a08cf7f692c9d42'
+};
+const fbApp=initializeApp(firebaseConfig);
+const db=getDatabase(fbApp);
+const dbRef=ref(db,'mossarun_v6');
+
 let S={};
-try{S=JSON.parse(localStorage.getItem(STORAGE)||'{}');}catch(e){}
-const save=()=>{try{localStorage.setItem(STORAGE,JSON.stringify(S));}catch(e){}};
+let saveTimer=null;
+
+function setSyncStatus(state){
+  const el=document.getElementById('sync-status');
+  if(!el)return;
+  if(state==='saving'){el.textContent='↑ Saving…';el.style.color='var(--orange-txt)';}
+  else if(state==='saved'){el.textContent='✓ Synced';el.style.color='var(--dim)';}
+  else if(state==='error'){el.textContent='⚠ Sync error';el.style.color='#c0392b';}
+}
+
+const save=()=>{
+  setSyncStatus('saving');
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>{
+    set(dbRef,S)
+      .then(()=>setSyncStatus('saved'))
+      .catch(()=>setSyncStatus('error'));
+  },600);
+};
+
 const ds=id=>S[id]||'none';
 function cycle(id){const c=ds(id);S[id]=c==='none'?'done':c==='done'?'missed':'none';save();render();}
 function markMissed(id){S[id]=ds(id)==='missed'?'none':'missed';save();render();}
+
+// Bootstrap: load from Firebase, then start listening for remote changes
+onValue(dbRef,snapshot=>{
+  const data=snapshot.val();
+  if(data)S=data;
+  render();
+},err=>{setSyncStatus('error');render();});
 
 function getOrder(week){const o=S['order_'+week.n];if(o&&o.length===week.days.length)return o;return week.days.map((_,i)=>i);}
 function saveOrder(week,order){S['order_'+week.n]=order;save();}
