@@ -536,6 +536,10 @@ const ds=id=>S[id]||'none';
 function cycle(id){const c=ds(id);S[id]=c==='none'?'done':c==='done'?'missed':'none';save();render();}
 function markMissed(id){S[id]=ds(id)==='missed'?'none':'missed';save();render();}
 
+// Expose to window so inline onclick handlers work inside type="module"
+window.cycle=cycle;
+window.markMissed=markMissed;
+
 // Bootstrap: load from Firebase, then start listening for remote changes
 onValue(dbRef,snapshot=>{
   const data=snapshot.val();
@@ -731,6 +735,10 @@ function render(){
 }
 
 function toggleReorder(n){S['reorder_'+n]=!S['reorder_'+n];save();render();}
+
+// Expose all interactive functions to window (required for inline onclick with type="module")
+window.toggleWeek=toggleWeek;
+window.toggleReorder=toggleReorder;
 
 function initDrag(){
   let dragSrcWeek=null,dragSrcIdx=null,dragEl=null;
