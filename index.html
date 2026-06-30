@@ -267,6 +267,34 @@ body{
 }
 .adj-note strong{font-weight:600;color:var(--cream);}
 
+/* ══════════════════════════════════════════════════════════
+   DESKTOP LAYOUT (≥900px) — additive, mobile untouched below
+   ══════════════════════════════════════════════════════════ */
+@media (min-width:900px){
+
+  .main{max-width:1280px;margin:0 auto;padding:14px 32px 100px;}
+
+  .app-name{font-size:54px;}
+
+  .legend{margin-bottom:8px;}
+
+  .content-row{display:flex;gap:24px;align-items:flex-start;margin-top:32px;}
+
+  .hero-wrapper{
+    width:340px;flex-shrink:0;
+    margin:0;
+  }
+  .hero-wrapper::before,.hero-wrapper::after{display:none;}
+  .hero{
+    border:1px solid var(--border2);border-radius:var(--r2);
+    box-shadow:0 4px 24px rgba(0,0,0,0.45);
+  }
+  .hero.has-workout{border-top:1px solid var(--border2);border-left:2px solid rgba(200,144,58,0.65);}
+
+  #plan{flex:1;min-width:0;}
+  #plan > .phase-row:first-child{margin-top:0;}
+}
+
 /* ── DRAG HANDLE ─────────────────────────────────────────── */
 .drag-handle{width:22px;height:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;cursor:grab;color:rgba(255,255,255,0.08);font-size:14px;line-height:1;border-radius:4px;transition:color 0.15s,background 0.15s;touch-action:none;-webkit-tap-highlight-color:transparent;}
 .drag-handle:active{cursor:grabbing;}
@@ -311,10 +339,12 @@ body{
     <span class="leg-item"><span class="leg-dot" style="background:var(--c-race-bg)"></span>Race</span>
   </div>
 
-  <div class="hero-wrapper">
-    <div id="hero" class="hero"></div>
+  <div class="content-row">
+    <div class="hero-wrapper">
+      <div id="hero" class="hero"></div>
+    </div>
+    <div id="plan"></div>
   </div>
-  <div id="plan"></div>
 </div>
 
 <script type="module">
